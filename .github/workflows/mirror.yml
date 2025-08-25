@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push this branch to repo "<branch>: main"
+      - name: Push branch to homonymous repo main
         env:
           BRANCH: ${{ github.ref_name }}
           OWNER: ${{ github.repository_owner }}
