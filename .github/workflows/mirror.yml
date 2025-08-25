@@ -1,0 +1,31 @@
+name: Mirror non-main branches to homonymous repos
+
+on:
+  push:
+    branches-ignore:
+      - main
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    if: ${{ github.ref_name != 'main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the current branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push this branch to repo "<branch>: main"
+        env:
+          BRANCH: ${{ github.ref_name }}
+          OWNER: ${{ github.repository_owner }}
+          TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git remote add mirror "https://${TOKEN}@github.com/${OWNER}/${BRANCH}.git"
+          git push --force mirror HEAD:main
