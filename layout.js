@@ -1,3 +1,21 @@
+(function() {
+  const base = document.createElement('base');
+
+  if (window.location.pathname.startsWith("/dev")) {
+    base.href = "/dev/";
+  } else if (window.location.pathname.startsWith("/content")) {
+    base.href = "/content/";
+  } else {
+    base.href = "/";
+  }
+
+  document.head.appendChild(base);
+})();
+
+
+
+
+
 const headerHTML = `
 <header>
   <div class="header-main">
