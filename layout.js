@@ -170,7 +170,7 @@ const footerHTML = `
   if (cached && !isNaN(cachedTs) && now - cachedTs < CACHE_DURATION_MS) {
     applyVersion(cached);
   } else {
-    fetch('https://api.github.com/repos/jdecroocq/portfolio/releases/latest')
+    fetch('https://api.github.com/repos/jdecroocq/jdecroocq.github.io/releases/latest')
       .then(res => {
         if (!res.ok) throw new Error('Network response not ok');
         return res.json();
