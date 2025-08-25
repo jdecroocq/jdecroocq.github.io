@@ -117,7 +117,7 @@ const headerHTML = `
 const footerHTML = `
 <footer id="footer">
   <ul>
-    <li><a href="/legal_information">Legal Information</a></li>
+    <li><a href="legal_information">Legal Information</a></li>
     <li>
       <a href="https://github.com/jdecroocq/jdecroocq.github.io" target="_blank" rel="noopener noreferrer">
         <span id="build-version">Build -.-.-</span>
