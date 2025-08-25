@@ -14,6 +14,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install minimist glob
+
+      - name: Determine BASE_PATH
+        id: base
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then echo "BASE_PATH=/"; fi
+          if [ "${{ github.ref_name }}" = "dev" ]; then echo "BASE_PATH=/dev/"; fi
+          if [ "${{ github.ref_name }}" = "content" ]; then echo "BASE_PATH=/content/"; fi
+        shell: bash
+
+      - name: Apply <base> and BASE_PATH
+        run: node scripts/inject-base.js --dir=. --base="${{ github.ref_name == 'main' && '/' || github.ref_name == 'dev' && '/dev/' || '/content/' }}"
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
