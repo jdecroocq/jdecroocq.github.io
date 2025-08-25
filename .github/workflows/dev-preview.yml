@@ -1,4 +1,4 @@
-name: Deploy Dev Branch to GitHub Pages
+name: Dev Preview
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
           ref: dev
 
       - name: Deploy to dev repository
-        uses: peaceiris/actions-gh-pages@v6
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.DEV_REPO_TOKEN }}
           publish_dir: ./
