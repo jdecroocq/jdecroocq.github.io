@@ -1,0 +1,23 @@
+name: Miroir de DEV vers le dépôt DEV
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  push_to_mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: 'dev'
+
+      - name: Push to dev repository
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          repository: jdecroocq/dev
+          branch: main
+          force: true
