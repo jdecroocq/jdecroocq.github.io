@@ -9,18 +9,22 @@ jobs:
   push_to_mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      # Étape 1 : On récupère le code de la branche 'dev' du dépôt principal
+      - name: Checkout code from dev branch
         uses: actions/checkout@v3
         with:
+          # On s'assure de bien prendre le code qui vient d'être poussé
           ref: 'dev'
+          # On récupère tout l'historique pour éviter les problèmes
+          fetch-depth: 0
 
-      - name: Push to dev repository (alternative method)
-        uses: cpina/github-action-push-to-another-repo@v1.5.1
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
-        with:
-          source-directory: '.'
-          destination-github-username: 'jdecroocq'
-          destination-repository-name: 'dev'
-          target-branch: main
-          force: true
+      # Étape 2 : On pousse le code vers le dépôt miroir 'jdecroocq/dev'
+      - name: Push to dev repository
+        run: |
+          # On configure git pour qu'il pousse vers le dépôt miroir en utilisant ton jeton secret pour s'authentifier
+          # C'est la commande la plus importante !
+          git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/jdecroocq/dev.git
+          
+          # On pousse la branche locale 'dev' vers la branche 'main' du dépôt miroir.
+          # Le '--force' est nécessaire pour que ce soit un miroir parfait.
+          git push --force origin dev:main
