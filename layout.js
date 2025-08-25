@@ -184,8 +184,6 @@ document.addEventListener('click', function (e) {
     return;
   }
 
-  if (link.target === "_blank" || link.href.startsWith("mailto:")) return;
-
   const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "");
   const currentPath = window.location.pathname.replace(/\/+$/, "");
 
