@@ -1,4 +1,4 @@
-name: Mirror the content branch to the content repository
+name: Mirror of the content branch to the content repository
 
 on:
   push:
@@ -9,15 +9,14 @@ jobs:
   push_to_mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code from content branch
         uses: actions/checkout@v3
         with:
           ref: 'content'
+          fetch-depth: 0
+          persist-credentials: false
 
-      - name: Push to content repository
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          repository: jdecroocq/content
-          branch: main
-          force: true
+      - name: Push to dev repository
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/jdecroocq/content.git
+          git push --force origin content:main
