@@ -14,6 +14,15 @@ jobs:
         with:
           ref: 'dev'
 
+      - name: Verifier si le secret est accessible
+        run: |
+          if [ -n "${{ secrets.ACCESS_TOKEN }}" ]; then
+            echo "✅ Le secret ACCESS_TOKEN est bien présent."
+          else
+            echo "❌ ERREUR : Le secret ACCESS_TOKEN est INTROUVABLE ou VIDE."
+            exit 1 # Fait échouer l'action immédiatement
+          fi
+
       - name: Push to dev repository
         uses: ad-m/github-push-action@v0.6.0
         with:
