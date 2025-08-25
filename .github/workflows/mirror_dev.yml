@@ -1,4 +1,4 @@
-name: Miroir de DEV vers le dépôt DEV
+name: Mirror of the dev branch to the dev repository
 
 on:
   push:
@@ -9,16 +9,13 @@ jobs:
   push_to_mirror:
     runs-on: ubuntu-latest
     steps:
-      # Étape 1 : Récupérer le code SANS configurer les identifiants Git par défaut
       - name: Checkout code from dev branch
         uses: actions/checkout@v3
         with:
           ref: 'dev'
           fetch-depth: 0
-          # CETTE LIGNE EST LA CORRECTION CRUCIALE
           persist-credentials: false
 
-      # Étape 2 : Pousser vers le dépôt miroir en utilisant explicitement TON jeton
       - name: Push to dev repository
         run: |
           git remote set-url origin https://x-access-token:${{ secrets.ACCESS_TOKEN }}@github.com/jdecroocq/dev.git
