@@ -1,0 +1,24 @@
+name: Deploy Dev Branch to GitHub Pages
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v3
+        with:
+          ref: dev
+
+      - name: Deploy to dev repository
+        uses: peaceiris/actions-gh-pages@v6
+        with:
+          github_token: ${{ secrets.DEV_REPO_TOKEN }}
+          publish_dir: ./
+          destination_repo: jdecroocq/dev
+          destination_branch: main
+          keep_files: false
