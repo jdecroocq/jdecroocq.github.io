@@ -1,4 +1,4 @@
-name: Mirror the dev branch to the dev repository
+name: Miroir de DEV vers le dépôt DEV
 
 on:
   push:
@@ -14,19 +14,13 @@ jobs:
         with:
           ref: 'dev'
 
-      - name: Verifier si le secret est accessible
-        run: |
-          if [ -n "${{ secrets.ACCESS_TOKEN }}" ]; then
-            echo "✅ Le secret ACCESS_TOKEN est bien présent."
-          else
-            echo "❌ ERREUR : Le secret ACCESS_TOKEN est INTROUVABLE ou VIDE."
-            exit 1 # Fait échouer l'action immédiatement
-          fi
-
-      - name: Push to dev repository
-        uses: ad-m/github-push-action@v0.6.0
+      - name: Push to dev repository (alternative method)
+        uses: cpina/github-action-push-to-another-repo@v1.5.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
         with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          repository: jdecroocq/dev
-          branch: main
+          source-directory: '.'
+          destination-github-username: 'jdecroocq'
+          destination-repository-name: 'dev'
+          target-branch: main
           force: true
