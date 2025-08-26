@@ -1,4 +1,4 @@
-name: Mirror of the dev branch to the dev repository
+name: dev-mirroring
 
 on:
   push:
