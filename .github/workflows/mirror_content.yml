@@ -1,4 +1,4 @@
-name: Mirror of the content branch to the content repository
+name: content-mirroring
 
 on:
   push:
