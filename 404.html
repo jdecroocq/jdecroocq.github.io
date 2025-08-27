@@ -4,18 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 - Page not found</title>
-    <script>
-    const path = window.location.pathname;
-    let baseHref = '/';
-    if (path.startsWith('/dev/')) baseHref = '/dev/';
-    else if (path.startsWith('/content/')) baseHref = '/content/';
-    const baseEl = document.createElement('base');
-    baseEl.href = baseHref;
-    document.head.appendChild(baseEl);
-  </script>
-  <link rel="icon" type="image/png" href="icons/ico.png"/>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="layout.js" defer></script>
+  <link rel="icon" type="image/png" href="/icons/ico.png"/>
+  <link rel="stylesheet" href="/style.css"/>
+  <script src="/layout.js" defer></script>
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -26,7 +17,7 @@
         <h3>No worries, it happens even to the best of us.</h3>
         <p>The page you're looking for doesn’t exist (error 404), or it may have been moved.</p>
         <p>Double-check the URL, head back to the homepage, or hang around here a moment and gather your thoughts.</p>
-        <a class="green-button" href="./">Back to the homepage</a>
+        <a class="green-button" href="/">Back to the homepage</a>
       </div>
       <div class="notfound-illustration">
         <a href="https://en.wikipedia.org/wiki/Utah_teapot" target="_blank" rel="noopener noreferrer">
