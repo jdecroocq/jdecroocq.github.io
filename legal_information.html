@@ -4,18 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Legal Information</title>
-  <script>
-    const path = window.location.pathname;
-    let baseHref = '/';
-    if (path.startsWith('/dev/')) baseHref = '/dev/';
-    else if (path.startsWith('/content/')) baseHref = '/content/';
-    const baseEl = document.createElement('base');
-    baseEl.href = baseHref;
-    document.head.appendChild(baseEl);
-  </script>
-  <link rel="icon" type="image/png" href="icons/ico.png"/>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="layout.js" defer></script>
+  <link rel="icon" type="image/png" href="/icons/ico.png"/>
+  <link rel="stylesheet" href="/style.css"/>
+  <script src="/layout.js" defer></script>
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -56,7 +47,7 @@
         <p>
           The website’s source code (HTML, CSS, JavaScript) is released under the MIT License,
           except for the assets listed below, which are subject to their own copyright or trademark rights.
-          The code is publicly available on <a href="https://github.com/jdecroocq/portfolio" target="_blank" rel="noopener">GitHub</a>.
+          The code is publicly available on <a href="https://github.com/jdecroocq/jdecroocq.github.io" target="_blank" rel="noopener">GitHub</a>.
         </p>
   
         <h4>Brand Assets</h4>
