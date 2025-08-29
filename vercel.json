@@ -1,1 +1,8 @@
-{ "cleanUrls": true, "git": { "deploymentEnabled": { "main": false } } }
+{
+  "cleanUrls": true,
+  "git": {
+    "deploymentEnabled": {
+      "main": false
+    }
+  }
+}
