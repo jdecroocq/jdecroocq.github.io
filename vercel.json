@@ -5,17 +5,45 @@
       "main": false
     }
   },
+
   "rewrites": [
     {
       "source": "/robots.txt",
       "has": [
         {
           "type": "header",
-          "key": "x-vercel-env",
-          "value": "preview"
+          "key": "host",
+          "value": "jdecroocq-dev\\.vercel\\.app"
         }
       ],
       "destination": "/robots.preview.txt"
+    },
+    {
+      "source": "/robots.txt",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": ".*-git-.*\\.vercel\\.app"
+        }
+      ],
+      "destination": "/robots.preview.txt"
+    }
+  ],
+
+  "headers": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "host",
+          "value": "jdecroocq-dev\\.vercel\\.app"
+        }
+      ],
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
     }
   ]
 }
