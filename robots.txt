@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://jdecroocq.vercel.app/sitemap.xml
+Sitemap: https://jdecroocq.github.io/sitemap.xml
