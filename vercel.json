@@ -4,5 +4,18 @@
     "deploymentEnabled": {
       "main": false
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/robots.txt",
+      "has": [
+        {
+          "type": "header",
+          "key": "x-vercel-env",
+          "value": "preview"
+        }
+      ],
+      "destination": "/robots.preview.txt"
+    }
+  ]
 }
