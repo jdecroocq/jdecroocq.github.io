@@ -101,7 +101,7 @@ body {
   --animation-header: 0.4s ease-in-out;
   --duration-theme-transition: 0.4s;
   --curve-smooth: cubic-bezier(0.2, 0.6, 0.5, 1);
-  --curve-fluid: cubic-bezier(0.1, 0.9, 0.5, 1.1);
+  --curve-fluid: cubic-bezier(0.2, 1.1, 0.5, 1.1);
 
   --blur-1: blur(16px);
   --blur-2: blur(32px);
