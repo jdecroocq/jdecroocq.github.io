@@ -845,13 +845,13 @@ footer a:hover {
 
 .icon-img {
   height: 100%;
-  max-height: 25px;
+  max-height: 24px;
   object-fit: contain;
-  transition: 0.2s;
+  transition: transform var(--animation-base);
 }
 
-.icon-img:hover {
-  transform: scale(1.1);
+.social-icons a:hover .icon-img {
+  transform: translateY(2px);
 }
 
 .skill {
