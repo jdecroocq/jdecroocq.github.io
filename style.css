@@ -99,8 +99,9 @@ body {
   --color-border: var(--color-3);
 
   --animation-header: 0.4s ease-in-out;
-  --animation-base: 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   --duration-theme-transition: 0.4s;
+  --curve-smooth: cubic-bezier(0.2, 0.6, 0.5, 1);
+  --curve-fluid: cubic-bezier(0.4, 1.1, 0.7, 1.2);
 
   --blur-1: blur(16px);
   --blur-2: blur(32px);
@@ -215,6 +216,11 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+::selection {
+  color: var(--color-0);
+  background-color: var(--color-5);
 }
 
 
@@ -491,11 +497,11 @@ body.light-mode .switch-thumb {
 }
 
 .theme-transition body.light-mode .switch-thumb {
-  animation: squish-to-light var(--animation-base);
+  animation: squish-to-light 0.4s var(--curve-fluid);
 }
 
 .theme-transition body:not(.light-mode) .switch-thumb {
-  animation: squish-to-dark var(--animation-base);
+  animation: squish-to-dark 0.4s var(--curve-fluid);
 }
 
 @keyframes squish-to-light {
@@ -796,7 +802,6 @@ footer a:hover {
   color: var(--color-5);
   text-align: left;
   line-height: 1.2;
-  margin: 0;
 }
 
 .location {
@@ -804,19 +809,21 @@ footer a:hover {
   color: var(--color-4);
   text-align: left;
   line-height: 1.2;
-  margin: 16px 0;
+  margin: 16px 0 8px 0;
 }
 
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 4px;
 }
 
 .social-icons a {
   opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInOne 0.6s ease forwards;
+  transform: translateY(20px);
+  animation: fadeInOne 0.6s var(--curve-smooth) forwards;
+  padding: 8px;
+  font-size: 0;
 }
 
 .social-icons a:nth-child(1) {
@@ -844,13 +851,13 @@ footer a:hover {
 
 .icon-img {
   height: 100%;
-  max-height: 25px;
+  max-height: 24px;
   object-fit: contain;
-  transition: 0.2s;
+  transition: transform 0.2s cubic-bezier(0.2, 0.6, 0.5, 1);
 }
 
-.icon-img:hover {
-  transform: scale(1.1);
+.social-icons a:hover .icon-img {
+  transform: translateY(2px);
 }
 
 .skill {
@@ -900,7 +907,7 @@ footer a:hover {
   width: 45px;
   height: auto;
   object-fit: contain;
-  transition: var(--animation-base);
+  transition: 0.4s var(--curve-smooth);
 }
 
 .connect-list {
