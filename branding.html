@@ -18,35 +18,35 @@
       <section class="section">
         <h2>Colors</h2>
         
-        <h4>Greyscale Palette</h4>
+        <h4 class="palette-title">Greyscale Palette</h4>
         <div class="color-palette">
           <div class="color-swatch">
-            <div class="swatch-preview" style="background: var(--color-5);"></div>
-            <div class="swatch-info"><h4>Color 5</h4></div>
-          </div>
-          <div class="color-swatch">
-            <div class="swatch-preview" style="background: var(--color-4);"></div>
-            <div class="swatch-info"><h4>Color 4</h4></div>
-          </div>
-          <div class="color-swatch">
-            <div class="swatch-preview" style="background: var(--color-3);"></div>
-            <div class="swatch-info"><h4>Color 3</h4></div>
-          </div>
-          <div class="color-swatch">
-            <div class="swatch-preview" style="background: var(--color-2);"></div>
-            <div class="swatch-info"><h4>Color 2</h4></div>
+            <div class="swatch-preview" style="background: var(--color-0);"></div>
+            <div class="swatch-info"><h4>Color 0</h4><div class="color-codes"><p>RGB: <code class="copyable">0, 0, 0</code></p></div></div>
           </div>
           <div class="color-swatch">
             <div class="swatch-preview" style="background: var(--color-1);"></div>
-            <div class="swatch-info"><h4>Color 1</h4></div>
+            <div class="swatch-info"><h4>Color 1</h4><div class="color-codes"><p>RGB: <code class="copyable">10, 10, 10</code></p></div></div>
           </div>
           <div class="color-swatch">
-            <div class="swatch-preview" style="background: var(--color-0);"></div>
-            <div class="swatch-info"><h4>Color 0</h4></div>
+            <div class="swatch-preview" style="background: var(--color-2);"></div>
+            <div class="swatch-info"><h4>Color 2</h4><div class="color-codes"><p>RGB: <code class="copyable">20, 20, 20</code></p></div></div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-3);"></div>
+            <div class="swatch-info"><h4>Color 3</h4><div class="color-codes"><p>RGB: <code class="copyable">31, 31, 31</code></p></div></div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-4);"></div>
+            <div class="swatch-info"><h4>Color 4</h4><div class="color-codes"><p>RGB: <code class="copyable">160, 160, 160</code></p></div></div>
+          </div>
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-5);"></div>
+            <div class="swatch-info"><h4>Color 5</h4><div class="color-codes"><p>RGB: <code class="copyable">255, 255, 255</code></p></div></div>
           </div>
         </div>
 
-        <h4>Accent Palette</h4>
+        <h4 class="palette-title">Accent Palette</h4>
         <div class="color-palette">
           <div class="color-swatch">
             <div class="swatch-preview" style="background: var(--color-a-g);"></div>
@@ -66,7 +66,7 @@
           </div>
         </div>
 
-        <h4>Gradient Palette</h4>
+        <h4 class="palette-title">Gradient Palette (45°)</h4>
         <div class="color-palette">
           <div class="color-swatch">
             <div class="swatch-preview" style="background: var(--color-a-g-g);"></div>
@@ -91,5 +91,21 @@
     </div>
   </main>
   <div id="footer-placeholder"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyables = document.querySelectorAll('.copyable');
+      copyables.forEach(el => {
+        const originalText = el.textContent;
+        el.addEventListener('click', () => {
+          navigator.clipboard.writeText(originalText).then(() => {
+            el.textContent = 'Copied!';
+            setTimeout(() => { el.textContent = originalText; }, 1500);
+          }).catch(err => { console.error('Failed to copy text: ', err); });
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>
