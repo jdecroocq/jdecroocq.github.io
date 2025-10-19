@@ -31,7 +31,20 @@ body {
   --color-3-rgb: 31, 31, 31;
   --color-4-rgb: 160, 160, 160;
   --color-5-rgb: 255, 255, 255;
+  /* couleur 6 à supp. à l'avenir, ainsi que toutes ses dérivées */
   --color-6-rgb: 28, 210, 130;
+
+   --color-a-g: #1DE095; /* Accent Green */
+  --color-a-b: #8A7FFF; /* Accent Blue/Indigo */
+  --color-a-r: #E5877D; /* Accent Red/Ember */
+  --color-a-v: var(--color-a-g); /* Accent Variable (defaults to green) */
+
+  /* Accent Gradients (Simple, hard-coded values for now) */
+  --color-a-g-g: linear-gradient(45deg, #15b374, #40f7b0);
+  --color-a-b-g: linear-gradient(45deg, #7b6ff0, #9c92ff);
+  --color-a-r-g: linear-gradient(45deg, #d97368, #f09e95);
+  --color-a-v-g: var(--color-a-g-g); /* Variable Gradient */
+
 
   --alpha-75: 0.75;
   --alpha-50: 0.5;
@@ -1153,16 +1166,6 @@ footer a:hover {
 
 
 
-.palette-title {
-  margin: 3rem 0 1rem 0;
-  color: var(--color-5);
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1rem;
-  border-bottom: var(--border);
-  padding-bottom: 0.5rem;
-}
-
 .color-palette {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1185,42 +1188,19 @@ footer a:hover {
 
 .swatch-info {
   padding: 16px 20px;
+  /* Fixed height to ensure all swatches are the same size */
+  min-height: 90px; 
+  box-sizing: border-box;
 }
 
+/* Override global h4 styles for this specific context */
 .swatch-info h4 {
-  margin: 0 0 12px 0;
-  color: var(--color-5);
-  font-size: 1rem;
+  margin: 0; /* Reset margin */
+  text-transform: none; /* Use normal case instead of uppercase */
+  font-weight: bold; /* Ensure it's bold */
+  font-size: 1.1rem; /* Slightly larger for clarity */
 }
 
 .swatch-info h4::before {
-  content: none;
-}
-
-.swatch-info p {
-  margin: 0 0 4px 0;
-  font-size: 0.9rem;
-  color: var(--color-4);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.color-codes {
-  font-family: monospace;
-}
-
-.copyable {
-  cursor: pointer;
-  background-color: var(--color-2);
-  padding: 2px 6px;
-  border-radius: 4px;
-  /* transition removed as requested */
-}
-
-@media (hover: hover) {
-  .copyable:hover {
-    background-color: var(--color-3);
-    color: var(--color-5);
-  }
+  content: none; /* Remove the diamond prefix */
 }
