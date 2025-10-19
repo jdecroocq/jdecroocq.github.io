@@ -1339,3 +1339,45 @@ footer a:hover {
     color: var(--color-5);
   }
 }
+
+.branding-feature-layout {
+  display: flex;
+  gap: 4vw;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.feature-visual {
+  flex: 0 0 200px; /* Do not grow, do not shrink, base size 200px */
+}
+
+.feature-description {
+  flex: 1 1 auto; /* Grow and shrink as needed */
+}
+
+.branding-logo-svg {
+  width: 100%;
+  height: auto;
+  color: var(--color-5);
+}
+
+.wip-note {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--color-4);
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .branding-feature-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+  .feature-visual {
+    flex-basis: 150px; /* A bit smaller on mobile */
+    margin-bottom: 2rem;
+  }
+  .feature-description {
+    text-align: justify; /* Keep text justified on mobile for readability */
+  }
+}
