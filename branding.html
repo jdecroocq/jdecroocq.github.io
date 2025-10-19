@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branding</title>
+  <link rel="icon" type="image/png" href="/icons/ico.png"/>
+  <link rel="stylesheet" href="/style.css"/>
+  <script src="/layout.js" defer></script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main class="page">
+    <div class="panel">
+  
+      <h1>Branding</h1>
+  
+      <section class="section">
+        <h2>Colors</h2>
+        <p>
+          The color palette of the site. The main accent color can be changed, and its gradient variations will adapt automatically. Click on any color code to copy it to your clipboard.
+        </p>
+        
+        <div class="color-palette">
+          <!-- Swatch for the main accent color -->
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-6);"></div>
+            <div class="swatch-info">
+              <h4>Accent Color</h4>
+              <div class="color-codes">
+                <p>HEX: <code class="copyable">#1CD282</code></p>
+                <p>RGB: <code class="copyable">28, 210, 130</code></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Swatch for the gradient -->
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-6-g);"></div>
+            <div class="swatch-info">
+              <h4>Accent Gradient</h4>
+              <div class="color-codes">
+                 <p>From: <code class="copyable">#05BE64</code></p>
+                 <p>To: <code class="copyable">#32E6A0</code></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Greyscale Swatches -->
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-5);"></div>
+            <div class="swatch-info">
+              <h4>Primary Text / Black</h4>
+              <div class="color-codes">
+                <p>HEX: <code class="copyable">#FFFFFF</code></p>
+                <p>RGB: <code class="copyable">255, 255, 255</code></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-4);"></div>
+            <div class="swatch-info">
+              <h4>Secondary Text / Grey</h4>
+              <div class="color-codes">
+                <p>HEX: <code class="copyable">#A0A0A0</code></p>
+                <p>RGB: <code class="copyable">160, 160, 160</code></p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-3);"></div>
+            <div class="swatch-info">
+              <h4>Borders / Light Grey</h4>
+              <div class="color-codes">
+                <p>HEX: <code class="copyable">#1F1F1F</code></p>
+                <p>RGB: <code class="copyable">31, 31, 31</code></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="color-swatch">
+            <div class="swatch-preview" style="background: var(--color-0);"></div>
+            <div class="swatch-info">
+              <h4>Background / Black</h4>
+              <div class="color-codes">
+                <p>HEX: <code class="copyable">#000000</code></p>
+                <p>RGB: <code class="copyable">0, 0, 0</code></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+  
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Simple script to copy color codes to clipboard
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyables = document.querySelectorAll('.copyable');
+      
+      copyables.forEach(el => {
+        const originalText = el.textContent;
+        el.addEventListener('click', () => {
+          navigator.clipboard.writeText(originalText).then(() => {
+            el.textContent = 'Copied!';
+            setTimeout(() => {
+              el.textContent = originalText;
+            }, 1500);
+          }).catch(err => {
+            console.error('Failed to copy text: ', err);
+          });
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
