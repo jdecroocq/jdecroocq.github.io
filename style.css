@@ -31,8 +31,6 @@ body {
   --color-3-rgb: 31, 31, 31;
   --color-4-rgb: 160, 160, 160;
   --color-5-rgb: 255, 255, 255;
-  /* couleur 6 à supp. à l'avenir, ainsi que toutes ses dérivées */
-  --color-6-rgb: 28, 210, 130;
 
   --color-a-g-h: 155;
   --color-a-g-s: 78%;
@@ -51,11 +49,9 @@ body {
   --color-a-v-l: 51%;
 
 
-
   --gradient-angle: 45deg;
   --gradient-hue-shift: 15;
   --gradient-lightness-shift: 5%;
-
 
 
   --color-a-g: hsl(var(--color-a-g-h), var(--color-a-g-s), var(--color-a-g-l));
@@ -115,16 +111,6 @@ body {
   --color-5-75: rgba(var(--color-5-rgb), var(--alpha-75));
   --color-5-50: rgba(var(--color-5-rgb), var(--alpha-50));
   --color-5-25: rgba(var(--color-5-rgb), var(--alpha-25));
-
-  --color-6: rgb(var(--color-6-rgb));
-  --color-6-75: rgba(var(--color-6-rgb), var(--alpha-75));
-  --color-6-50: rgba(var(--color-6-rgb), var(--alpha-50));
-  --color-6-25: rgba(var(--color-6-rgb), var(--alpha-25));
-
-  --color-6-g-0: #05be64;
-  --color-6-g-1: #32e6a0;
-  --color-6-g: linear-gradient(45deg, var(--color-6-g-0), var(--color-6-g-1));
-
   
 
   --size-header: 64px;
@@ -152,17 +138,13 @@ body {
 
   --border: var(--size-border) solid var(--color-border);
   --border-d: var(--size-border) dashed var(--color-border);
-  --border-a: var(--size-border) solid var(--color-6);
+  --border-a: var(--size-border) solid var(--color-a-v);
   --border-radius-1: 8px;
   --border-radius-2: 16px;
   --border-shadow: inset 0 -1px 0px var(--color-border);
 
   --shadow-i: var(--alpha-25);
   --shadow: 0 0 4px rgba(0, 0, 0, var(--shadow-i));
-  --glow:
-    0 0 5px var(--color-6-25),
-    0 0 15px var(--color-6-25),
-    0 0 35px var(--color-6-25);
 
   --switch-mode: 768px;
 
@@ -226,7 +208,7 @@ h4 {
 h4::before {
   content: "✦";
   margin-right: 0.5rem;
-  color: var(--color-6);
+  color: var(--color-a-v);
 }
 
 h5 {
@@ -254,7 +236,7 @@ li {
 }
 
 a {
-  color: var(--color-6);
+  color: var(--color-a-v);
   text-decoration: none;
 }
 
@@ -316,7 +298,7 @@ a:hover {
   font-size: 18px;
   padding: 16px 20px;
   display: inline-block;
-  background: var(--color-6-g);
+  background: var(--color-a-v-g);
   color: var(--color-0);
   border-radius: var(--border-radius-1);
   text-decoration: none !important;
@@ -329,7 +311,7 @@ a:hover {
 
 .green-button:hover {
   background: transparent;
-  color: var(--color-6) !important;
+  color: var(--color-a-v) !important;
   border: var(--border-a);
 }
 
@@ -352,13 +334,13 @@ a:hover {
   font-size: 12px;
   font-weight: bold;
   cursor: help;
-  user-select: none; /* Prevent text selection on the '?' */
-  margin-left: 8px; /* Space between title and icon */
+  user-select: none;
+  margin-left: 8px;
 }
 
 .tooltip-content {
   position: absolute;
-  bottom: 120%; /* Position above the trigger */
+  bottom: 120%;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--color-1);
@@ -368,18 +350,16 @@ a:hover {
   border-radius: var(--border-radius-1);
   box-shadow: var(--shadow);
   font-size: 0.8rem;
+  text-transform: none;
   line-height: 1.3;
-  width: max-content; /* Adapts to content width */
-  max-width: 250px; /* But doesn't get too wide */
-  text-align: left; /* Ensure text inside is left-aligned */
-  
-  /* Hidden by default */
+  width: max-content;
+  max-width: 250px;
+  text-align: left;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease-out;
 }
 
-/* Show on hover */
 .tooltip-wrapper:hover .tooltip-content {
   opacity: 1;
   pointer-events: auto;
@@ -1259,8 +1239,8 @@ footer a:hover {
   margin-bottom: 1.5rem;
   border-bottom: var(--border);
   padding-bottom: 0.75rem;
-  text-align: center; /* Centered title */
-  display: flex; /* Helps vertically align the tooltip icon */
+  text-align: center;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -1295,7 +1275,7 @@ footer a:hover {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Aligns content to the top */
+  justify-content: flex-start;
 }
 
 .swatch-info h4 {
@@ -1306,7 +1286,7 @@ footer a:hover {
 }
 
 .swatch-info h4:last-child {
-  margin-bottom: 0; /* Remove margin if it's the only element */
+  margin-bottom: 0;
 }
 
 .swatch-info h4::before {
@@ -1348,11 +1328,11 @@ footer a:hover {
 }
 
 .feature-visual {
-  flex: 0 0 200px; /* Do not grow, do not shrink, base size 200px */
+  flex: 0 0 200px;
 }
 
 .feature-description {
-  flex: 1 1 auto; /* Grow and shrink as needed */
+  flex: 1 1 auto;
 }
 
 .branding-logo-svg {
@@ -1374,10 +1354,10 @@ footer a:hover {
     text-align: center;
   }
   .feature-visual {
-    flex-basis: 150px; /* A bit smaller on mobile */
+    flex-basis: 150px;
     margin-bottom: 2rem;
   }
   .feature-description {
-    text-align: justify; /* Keep text justified on mobile for readability */
+    text-align: justify;
   }
 }
