@@ -34,22 +34,18 @@ body {
   /* couleur 6 à supp. à l'avenir, ainsi que toutes ses dérivées */
   --color-6-rgb: 28, 210, 130;
 
-    /* -- Green -- (from #1CD282) */
   --color-a-g-h: 155;
   --color-a-g-s: 78%;
   --color-a-g-l: 51%;
 
-  /* -- Blue -- (from #3c52dc) */
   --color-a-b-h: 232;
   --color-a-b-s: 69%;
   --color-a-b-l: 55%;
 
-  /* -- Red -- (from #972929) */
   --color-a-r-h: 0;
   --color-a-r-s: 57%;
   --color-a-r-l: 38%;
 
-  /* -- Variable Color -- (Starts as a copy of Green) */
   --color-a-v-h: 155;
   --color-a-v-s: 78%;
   --color-a-v-l: 51%;
@@ -57,19 +53,16 @@ body {
 
 
   --gradient-angle: 45deg;
-  --gradient-hue-shift: 10;     /* How many degrees the hue shifts at the edges. */
-  --gradient-lightness-shift: 5%; /* How much lighter/darker the edges get. */
-  /* --gradient-saturation-shift: 0%; */ /* You can also play with saturation if you want. */
+  --gradient-hue-shift: 15;
+  --gradient-lightness-shift: 5%;
 
 
 
-  /* -- Final Solid Colors -- */
   --color-a-g: hsl(var(--color-a-g-h), var(--color-a-g-s), var(--color-a-g-l));
   --color-a-b: hsl(var(--color-a-b-h), var(--color-a-b-s), var(--color-a-b-l));
   --color-a-r: hsl(var(--color-a-r-h), var(--color-a-r-s), var(--color-a-r-l));
   --color-a-v: hsl(var(--color-a-v-h), var(--color-a-v-s), var(--color-a-v-l));
 
-  /* -- Final Auto-Generated Gradients -- */
   --color-a-g-g: linear-gradient(var(--gradient-angle),
     hsl(calc(var(--color-a-g-h) - var(--gradient-hue-shift)), var(--color-a-g-s), calc(var(--color-a-g-l) - var(--gradient-lightness-shift))),
     hsl(calc(var(--color-a-g-h) + var(--gradient-hue-shift)), var(--color-a-g-s), calc(var(--color-a-g-l) + var(--gradient-lightness-shift)))
