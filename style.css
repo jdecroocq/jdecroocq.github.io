@@ -1214,6 +1214,13 @@ footer a:hover {
   content: none;
 }
 
+.palette-description {
+  font-size: 0.9rem;
+  color: var(--color-4);
+  max-width: 60ch; /* Limit line length for readability */
+  margin: -1rem 0 1.5rem 0; /* Adjust spacing around the title */
+}
+
 .color-palette {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1246,7 +1253,7 @@ footer a:hover {
 .swatch-info h4 {
   margin: 0 0 12px 0;
   text-transform: none;
-  font-weight: bold;
+  font-weight: normal; /* Changed from bold to normal */
   font-size: 1.1rem;
 }
 
