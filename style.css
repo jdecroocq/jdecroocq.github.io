@@ -34,15 +34,15 @@ body {
   /* couleur 6 à supp. à l'avenir, ainsi que toutes ses dérivées */
   --color-6-rgb: 28, 210, 130;
 
-   --color-a-g: #1DE095; /* Accent Green */
-  --color-a-b: #8A7FFF; /* Accent Blue/Indigo */
-  --color-a-r: #E5877D; /* Accent Red/Ember */
+  --color-a-g: #1CD282; /* Accent Green (Original --color-6) */
+  --color-a-b: #3c52dc; /* Accent Blue */
+  --color-a-r: #972929; /* Accent Red */
   --color-a-v: var(--color-a-g); /* Accent Variable (defaults to green) */
 
-  /* Accent Gradients (Simple, hard-coded values for now) */
+  /* Accent Gradients (Simple, hard-coded values) */
   --color-a-g-g: linear-gradient(45deg, #15b374, #40f7b0);
-  --color-a-b-g: linear-gradient(45deg, #7b6ff0, #9c92ff);
-  --color-a-r-g: linear-gradient(45deg, #d97368, #f09e95);
+  --color-a-b-g: linear-gradient(45deg, #3042b0, #5068f5);
+  --color-a-r-g: linear-gradient(45deg, #802222, #b53535);
   --color-a-v-g: var(--color-a-g-g); /* Variable Gradient */
 
 
@@ -1166,6 +1166,19 @@ footer a:hover {
 
 
 
+.palette-title {
+  /* Using h4's base styles but adding more spacing and a border */
+  margin-top: 4rem; /* More space between palettes */
+  margin-bottom: 1.5rem; /* Space between title and grid */
+  border-bottom: var(--border);
+  padding-bottom: 0.75rem;
+}
+
+/* On this page only, remove the diamond prefix from the palette titles */
+.panel h4.palette-title::before {
+  content: none;
+}
+
 .color-palette {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1188,19 +1201,51 @@ footer a:hover {
 
 .swatch-info {
   padding: 16px 20px;
-  /* Fixed height to ensure all swatches are the same size */
-  min-height: 90px; 
+  min-height: 90px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
 }
 
-/* Override global h4 styles for this specific context */
 .swatch-info h4 {
-  margin: 0; /* Reset margin */
-  text-transform: none; /* Use normal case instead of uppercase */
-  font-weight: bold; /* Ensure it's bold */
-  font-size: 1.1rem; /* Slightly larger for clarity */
+  margin: 0 0 12px 0;
+  text-transform: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.swatch-info h4:last-child {
+  margin-bottom: 0; /* Remove margin if it's the only element */
 }
 
 .swatch-info h4::before {
-  content: none; /* Remove the diamond prefix */
+  content: none;
+}
+
+.swatch-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.color-codes {
+  font-family: monospace;
+}
+
+.copyable {
+  cursor: pointer;
+  background-color: var(--color-2);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+@media (hover: hover) {
+  .copyable:hover {
+    background-color: var(--color-3);
+    color: var(--color-5);
+  }
 }
