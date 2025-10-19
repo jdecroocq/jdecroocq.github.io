@@ -26,7 +26,51 @@
 
         <h4 class="palette-title">Gradient Palette</h4>
         <div class="color-palette" id="gradient-palette"></div>
+      </section>
 
+      <section class="section">
+        <h2>Logo</h2>
+
+        <div class="branding-feature-layout">
+          <div class="feature-visual">
+            <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="branding-logo-svg">
+              <path fill="currentColor" d="m128 35.624 80 46.188v92.376l-80 46.188-80-46.188v-45.95l12 3.75v35.272l68 39.26 68-39.26V88.74l-68-39.26-68 39.26v24.499l-12-2.062V81.812z"/>
+              <path fill="currentColor" d="m0 108 128 22 63-10.828v9.141L128 148zm213 7.391L256 108l-43 13.437z"/>
+            </svg>
+          </div>
+          <div class="feature-description">
+            <h5>Meaning</h5>
+            <p>
+              The logo combines a wing within a hexagon. The hexagon evokes the silhouette of a cube and geometry, which represents creativity, 3D, and CGI. At its center, the wing symbolizes a passion for aviation and represents an eagle, a reference to my patron saint, St. John.
+            </p>
+            <h5>Design</h5>
+            <p>
+              Its design is intended to be elegant, sleek, sober, and streamlined. The clean, straight lines reflect my personal tastes and values.
+            </p>
+            <h5>Usage</h5>
+            <p>
+              This logo is primarily designed for use at larger sizes, such as a signature at the end of an animation video. Its thin strokes prevent it from looking heavy, but this elegance comes at the cost of legibility at very small sizes (e.g., as a browser favicon). It serves as a personal mark, a way to convey a piece of my identity through a simple, sober image rather than a corporate brand.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Typography</h2>
+        <p>
+          The primary typeface used across the site is <strong>Orkney</strong>, a geometric sans-serif font known for its clarity and modern feel.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Visual Motifs</h2>
+        <h5>Grain</h5>
+        <p>A subtle layer of film grain is often applied to visuals to add texture, depth, and a touch of cinematic quality. It helps to unify different elements and avoid an overly digital or sterile look.</p>
+        
+        <h5>Blur</h5>
+        <p>Selective blur and depth of field are used to guide the viewer's focus, create atmosphere, and enhance the sense of realism or stylization in CGI scenes. It is a key element in the site's artistic direction.</p>
+
+        <p class="wip-note">More examples and details will be added soon.</p>
       </section>
   
     </div>
@@ -35,9 +79,9 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // ... (le script existant pour les couleurs reste exactement le même)
       const rootStyles = getComputedStyle(document.body);
 
-      // --- Helper Function to create tooltips ---
       const createTooltip = (text) => {
         return `
           <span class="tooltip-wrapper">
@@ -46,7 +90,6 @@
           </span>`;
       };
 
-      // --- Helper Function to create a swatch ---
       const createSwatch = (container, { name, background, info }) => {
         const swatch = document.createElement('div');
         swatch.className = 'color-swatch';
@@ -60,14 +103,12 @@
         container.appendChild(swatch);
       };
 
-      // --- 1. Greyscale Palette ---
       const greyscalePalette = document.getElementById('greyscale-palette');
       for (let i = 0; i <= 5; i++) {
         const rgbValue = rootStyles.getPropertyValue(`--color-${i}-rgb`).trim();
         createSwatch(greyscalePalette, { name: `Color ${i}`, background: `var(--color-${i})`, info: `<p>RGB: <code class="copyable">${rgbValue}</code></p>` });
       }
       
-      // --- 2. Accent Palette ---
       const accentTitle = document.querySelector('#accent-palette').previousElementSibling;
       const variableTooltipText = 'The Variable color is a dynamic accent used throughout the site. It can be changed to match a specific project\'s mood or for special events, providing contextual theming.';
       accentTitle.innerHTML += createTooltip(variableTooltipText);
@@ -81,7 +122,6 @@
         createSwatch(accentPalette, { name: color.name, background: `var(--color-a-${color.id})`, info: `<p>HSL: <code class="copyable">${h}, ${s}, ${l}</code></p>` });
       });
 
-      // --- 3. Gradient Palette ---
       const gradientTitle = document.querySelector('#gradient-palette').previousElementSibling;
       const hueShift = rootStyles.getPropertyValue('--gradient-hue-shift').trim();
       const lightnessShift = rootStyles.getPropertyValue('--gradient-lightness-shift').trim();
@@ -94,7 +134,6 @@
         createSwatch(gradientPalette, { name: color.name, background: `var(--color-a-${color.id}-g)`, info: `<p>HSL: <code class="copyable-gradient" data-variable="--color-a-${color.id}-g">calculated</code></p>` });
       });
 
-      // --- Activate clipboard functionality ---
       document.querySelectorAll('.copyable, .copyable-gradient').forEach(el => {
         el.addEventListener('click', () => {
           const originalText = el.textContent;
