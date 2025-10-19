@@ -333,6 +333,59 @@ a:hover {
   border: var(--border-a);
 }
 
+.tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--color-4);
+  color: var(--color-4);
+  font-size: 12px;
+  font-weight: bold;
+  cursor: help;
+  user-select: none; /* Prevent text selection on the '?' */
+  margin-left: 8px; /* Space between title and icon */
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 120%; /* Position above the trigger */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-1);
+  border: var(--border);
+  color: var(--color-4);
+  padding: 8px 12px;
+  border-radius: var(--border-radius-1);
+  box-shadow: var(--shadow);
+  font-size: 0.8rem;
+  line-height: 1.3;
+  width: max-content; /* Adapts to content width */
+  max-width: 250px; /* But doesn't get too wide */
+  text-align: left; /* Ensure text inside is left-aligned */
+  
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out;
+}
+
+/* Show on hover */
+.tooltip-wrapper:hover .tooltip-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
 
 #dark-overlay {
   position: fixed;
@@ -1202,23 +1255,18 @@ footer a:hover {
 
 
 .palette-title {
-  /* Using h4's base styles but adding more spacing and a border */
-  margin-top: 4rem; /* More space between palettes */
-  margin-bottom: 1.5rem; /* Space between title and grid */
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
   border-bottom: var(--border);
   padding-bottom: 0.75rem;
+  text-align: center; /* Centered title */
+  display: flex; /* Helps vertically align the tooltip icon */
+  justify-content: center;
+  align-items: center;
 }
 
-/* On this page only, remove the diamond prefix from the palette titles */
 .panel h4.palette-title::before {
   content: none;
-}
-
-.palette-description {
-  font-size: 0.9rem;
-  color: var(--color-4);
-  max-width: 60ch; /* Limit line length for readability */
-  margin: -1rem 0 1.5rem 0; /* Adjust spacing around the title */
 }
 
 .color-palette {
@@ -1247,13 +1295,13 @@ footer a:hover {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically center content */
+  justify-content: flex-start; /* Aligns content to the top */
 }
 
 .swatch-info h4 {
   margin: 0 0 12px 0;
   text-transform: none;
-  font-weight: normal; /* Changed from bold to normal */
+  font-weight: normal;
   font-size: 1.1rem;
 }
 
