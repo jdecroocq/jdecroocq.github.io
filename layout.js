@@ -211,24 +211,28 @@ document.addEventListener('click', function (e) {
     const tooltipRect = tooltip.getBoundingClientRect();
     const margin = 16;
 
-    let top, left;
+    let finalTop, finalLeft;
 
-    if (rect.top - tooltipRect.height - margin > 0) {
-      top = window.scrollY + rect.top - tooltipRect.height - margin;
+    if (rect.top > tooltipRect.height + margin) {
+      finalTop = window.scrollY + rect.top - tooltipRect.height - margin;
     } else {
-      top = window.scrollY + rect.bottom + margin;
+      finalTop = window.scrollY + rect.bottom + margin;
     }
 
-    left = window.scrollX + rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+    let idealLeft = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
 
-    if (left < margin) {
-      left = margin;
-    } else if (left + tooltipRect.width > window.innerWidth - margin) {
-      left = window.innerWidth - tooltipRect.width - margin;
+    if (idealLeft < margin) {
+      finalLeft = margin;
+    } else if (idealLeft + tooltipRect.width > window.innerWidth - margin) {
+      finalLeft = window.innerWidth - tooltipRect.width - margin;
+    } else {
+      finalLeft = idealLeft;
     }
+    
+    finalLeft += window.scrollX;
 
-    tooltip.style.top = `${top}px`;
-    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${finalTop}px`;
+    tooltip.style.left = `${finalLeft}px`;
   }
 
   document.body.addEventListener('mouseover', function (e) {
