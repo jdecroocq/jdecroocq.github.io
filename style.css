@@ -708,7 +708,8 @@ footer {
 
 footer ul {
   display: flex;
-  gap: min(32px, 4vw);
+  flex-wrap: wrap;
+  gap: 8px 16px;
   list-style: none;
   margin: 0;
   padding: 0;
