@@ -71,7 +71,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const rootStyles = getComputedStyle(document.body);
-
+  
       const createSwatch = (container, { name, background, info }) => {
         const swatch = document.createElement('div');
         swatch.className = 'color-swatch';
@@ -84,7 +84,7 @@
         `;
         container.appendChild(swatch);
       };
-
+  
       const greyscalePalette = document.getElementById('greyscale-palette');
       for (let i = 0; i <= 5; i++) {
         const rgbValue = rootStyles.getPropertyValue(`--color-${i}-rgb`).trim();
@@ -103,7 +103,7 @@
         const l = rootStyles.getPropertyValue(`--color-a-${color.id}-l`).trim();
         createSwatch(accentPalette, { name: color.name, background: `var(--color-a-${color.id})`, info: `<p>HSL: <code class="copyable">${h}, ${s}, ${l}</code></p>` });
       });
-
+  
       const gradientTitle = document.querySelector('#gradient-palette').previousElementSibling;
       const hueShift = parseFloat(rootStyles.getPropertyValue('--gradient-hue-shift').trim());
       const lightnessShift = parseFloat(rootStyles.getPropertyValue('--gradient-lightness-shift').trim());
@@ -115,24 +115,27 @@
       accentColors.forEach(color => {
         createSwatch(gradientPalette, { name: color.name, background: `var(--color-a-${color.id}-g)`, info: `<p>CSS: <code class="copyable copyable-gradient" data-color-id="${color.id}">calculated</code></p>` });
       });
-
+  
       document.querySelectorAll('.copyable').forEach(el => {
         el.addEventListener('click', () => {
           const originalText = el.textContent;
           let textToCopy = originalText;
-
+  
           if (el.classList.contains('copyable-gradient')) {
             const colorId = el.dataset.colorId;
             const h = parseFloat(rootStyles.getPropertyValue(`--color-a-${colorId}-h`));
             const s = rootStyles.getPropertyValue(`--color-a-${colorId}-s`).trim();
             const l = parseFloat(rootStyles.getPropertyValue(`--color-a-${colorId}-l`));
-
-            const startH = h - hueShift;
-            const endH = h + hueShift;
-            const startL = l - lightnessShift;
-            const endL = l + lightnessShift;
+            const hueShiftVal = parseFloat(rootStyles.getPropertyValue('--gradient-hue-shift').trim());
+            const lightnessShiftVal = parseFloat(rootStyles.getPropertyValue('--gradient-lightness-shift').trim());
+            const angleVal = rootStyles.getPropertyValue('--gradient-angle').trim();
+  
+            const startH = h - hueShiftVal;
+            const endH = h + hueShiftVal;
+            const startL = l - lightnessShiftVal;
+            const endL = l + lightnessShiftVal;
             
-            textToCopy = `linear-gradient(${angle}, hsl(${startH}, ${s}, ${startL}%), hsl(${endH}, ${s}, ${endL}%))`;
+            textToCopy = `linear-gradient(${angleVal}, hsl(${startH}, ${s}, ${startL}%), hsl(${endH}, ${s}, ${endL}%))`;
           }
           
           navigator.clipboard.writeText(textToCopy).then(() => {
