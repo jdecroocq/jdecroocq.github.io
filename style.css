@@ -709,7 +709,7 @@ footer {
 footer ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 16px;
+  gap: 8px 32px;
   list-style: none;
   margin: 0;
   padding: 0;
