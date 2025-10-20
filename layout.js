@@ -118,6 +118,7 @@ const footerHTML = `
 <footer id="footer">
   <ul>
     <li><a href="/legal_information">Legal Information</a></li>
+    <li><a href="/branding">Branding</a></li>
     <li>
       <a href="https://github.com/jdecroocq/jdecroocq.github.io" target="_blank" rel="noopener noreferrer">
         <span id="build-version">Build -.-.-</span>
@@ -195,3 +196,57 @@ document.addEventListener('click', function (e) {
     });
   }
 });
+
+
+
+
+
+(function () {
+  function positionTooltip(e) {
+    const tooltip = e.target.querySelector('.dynamic-tooltip');
+    if (!tooltip) return;
+
+    const rect = e.target.getBoundingClientRect();
+    const tooltipRect = tooltip.getBoundingClientRect();
+    const margin = 8;
+
+    if (rect.top - tooltipRect.height - margin > 0) {
+      tooltip.style.top = `${window.scrollY + rect.top - tooltipRect.height - margin}px`;
+    } else {
+      tooltip.style.top = `${window.scrollY + rect.bottom + margin}px`;
+    }
+
+    let left = window.scrollX + rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+    if (left < margin) {
+      left = margin;
+    } else if (left + tooltipRect.width > window.innerWidth - margin) {
+      left = window.innerWidth - tooltipRect.width - margin;
+    }
+    tooltip.style.left = `${left}px`;
+  }
+
+  document.body.addEventListener('mouseover', function (e) {
+    const target = e.target.closest('[data-tooltip]');
+    if (!target || target.querySelector('.dynamic-tooltip')) return;
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'dynamic-tooltip';
+    tooltip.textContent = target.getAttribute('data-tooltip');
+    document.body.appendChild(tooltip);
+
+    target.setAttribute('data-tooltip-active', 'true');
+    target.addEventListener('mousemove', positionTooltip);
+  });
+
+  document.body.addEventListener('mouseout', function (e) {
+    const target = e.target.closest('[data-tooltip]');
+    if (!target || !target.hasAttribute('data-tooltip-active')) return;
+
+    const tooltip = document.querySelector('.dynamic-tooltip');
+    if (tooltip) {
+      tooltip.remove();
+    }
+    target.removeAttribute('data-tooltip-active');
+    target.removeEventListener('mousemove', positionTooltip);
+  });
+})();
