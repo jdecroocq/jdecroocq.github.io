@@ -37,7 +37,7 @@ body {
   --color-a-g-l: 51%;
 
   --color-a-b-h: 228;
-  --color-a-b-s: 80%;
+  --color-a-b-s: 90%;
   --color-a-b-l: 60%;
 
   --color-a-r-h: 3;
@@ -51,7 +51,7 @@ body {
 
   --gradient-angle: 45deg;
   --gradient-hue-shift: 10;
-  --gradient-lightness-shift: 5%;
+  --gradient-lightness-shift: 3%;
 
 
   --color-a-g: hsl(var(--color-a-g-h), var(--color-a-g-s), var(--color-a-g-l));
