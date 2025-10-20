@@ -108,12 +108,12 @@
       const hueShift = parseFloat(rootStyles.getPropertyValue('--gradient-hue-shift').trim());
       const lightnessShift = parseFloat(rootStyles.getPropertyValue('--gradient-lightness-shift').trim());
       const angle = rootStyles.getPropertyValue('--gradient-angle').trim();
-      const gradientTooltipText = `Generated with: ${angle} angle, Hue Shift ±${hueShift}, Lightness Shift ±${lightnessShift}%.`;
+      const gradientTooltipText = `Based on the solid colors, each gradient has a ${angle} angle, a hue shift of ±${hueShift}, and a lightness shift of ±${lightnessShift}%.`;
       gradientTitle.innerHTML = `<span>Gradient Palette</span><span class="info-icon" data-tooltip="${gradientTooltipText}"></span>`;
       
       const gradientPalette = document.getElementById('gradient-palette');
       accentColors.forEach(color => {
-        createSwatch(gradientPalette, { name: color.name, background: `var(--color-a-${color.id}-g)`, info: `<p>CSS: <code class="copyable copyable-gradient" data-color-id="${color.id}">calculated</code></p>` });
+        createSwatch(gradientPalette, { name: `${color.name} Gradient`, background: `var(--color-a-${color.id}-g)`, info: `<p>CSS: <code class="copyable copyable-gradient" data-color-id="${color.id}">calculated</code></p>` });
       });
   
       document.querySelectorAll('.copyable').forEach(el => {
