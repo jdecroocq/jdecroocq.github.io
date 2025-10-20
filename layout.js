@@ -209,7 +209,7 @@ document.addEventListener('click', function (e) {
 
     const rect = target.getBoundingClientRect();
     const tooltipRect = tooltip.getBoundingClientRect();
-    const margin = 8;
+    const margin = 16;
 
     let top, left;
 
