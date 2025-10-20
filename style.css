@@ -167,7 +167,7 @@ body.light-mode {
 
 
 h1 {
-  font-size: 3rem;
+  font-size: 5rem;
   font-weight: bold;
   text-transform: uppercase;
   color: var(--color-5);
@@ -177,7 +177,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.6rem;
+  font-size: 2.5rem;
   font-weight: bold;
   text-transform: uppercase;
   color: var(--color-5);
