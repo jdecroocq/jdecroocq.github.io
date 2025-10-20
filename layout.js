@@ -214,13 +214,18 @@ document.addEventListener('click', function (e) {
     let finalTop, finalLeft;
 
     if (rect.top > tooltipRect.height + margin) {
-      finalTop = window.scrollY + rect.top - tooltipRect.height - margin;
+      finalTop = rect.top - tooltipRect.height - margin;
     } else {
-      finalTop = window.scrollY + rect.bottom + margin;
+      finalTop = rect.bottom + margin;
+    }
+    if (finalTop < margin) {
+      finalTop = margin;
+    } else if (finalTop + tooltipRect.height > window.innerHeight - margin) {
+      finalTop = window.innerHeight - tooltipRect.height - margin;
     }
 
     let idealLeft = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-
+    
     if (idealLeft < margin) {
       finalLeft = margin;
     } else if (idealLeft + tooltipRect.width > window.innerWidth - margin) {
@@ -228,11 +233,9 @@ document.addEventListener('click', function (e) {
     } else {
       finalLeft = idealLeft;
     }
-    
-    finalLeft += window.scrollX;
 
-    tooltip.style.top = `${finalTop}px`;
-    tooltip.style.left = `${finalLeft}px`;
+    tooltip.style.top = `${finalTop + window.scrollY}px`;
+    tooltip.style.left = `${finalLeft + window.scrollX}px`;
   }
 
   document.body.addEventListener('mouseover', function (e) {
