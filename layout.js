@@ -202,51 +202,60 @@ document.addEventListener('click', function (e) {
 
 
 (function () {
-  function positionTooltip(e) {
-    const tooltip = e.target.querySelector('.dynamic-tooltip');
-    if (!tooltip) return;
+  let activeTooltip = null;
 
-    const rect = e.target.getBoundingClientRect();
+  function positionTooltip(target, tooltip) {
+    if (!target || !tooltip) return;
+
+    const rect = target.getBoundingClientRect();
     const tooltipRect = tooltip.getBoundingClientRect();
     const margin = 8;
 
+    let top, left;
+
     if (rect.top - tooltipRect.height - margin > 0) {
-      tooltip.style.top = `${window.scrollY + rect.top - tooltipRect.height - margin}px`;
+      top = window.scrollY + rect.top - tooltipRect.height - margin;
     } else {
-      tooltip.style.top = `${window.scrollY + rect.bottom + margin}px`;
+      top = window.scrollY + rect.bottom + margin;
     }
 
-    let left = window.scrollX + rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+    left = window.scrollX + rect.left + (rect.width / 2) - (tooltipRect.width / 2);
+
     if (left < margin) {
       left = margin;
     } else if (left + tooltipRect.width > window.innerWidth - margin) {
       left = window.innerWidth - tooltipRect.width - margin;
     }
+
+    tooltip.style.top = `${top}px`;
     tooltip.style.left = `${left}px`;
   }
 
   document.body.addEventListener('mouseover', function (e) {
     const target = e.target.closest('[data-tooltip]');
-    if (!target || target.querySelector('.dynamic-tooltip')) return;
+    if (!target || activeTooltip) return;
 
-    const tooltip = document.createElement('div');
-    tooltip.className = 'dynamic-tooltip';
-    tooltip.textContent = target.getAttribute('data-tooltip');
-    document.body.appendChild(tooltip);
+    activeTooltip = document.createElement('div');
+    activeTooltip.className = 'dynamic-tooltip';
+    activeTooltip.textContent = target.getAttribute('data-tooltip');
+    document.body.appendChild(activeTooltip);
 
-    target.setAttribute('data-tooltip-active', 'true');
-    target.addEventListener('mousemove', positionTooltip);
+    positionTooltip(target, activeTooltip);
   });
 
   document.body.addEventListener('mouseout', function (e) {
     const target = e.target.closest('[data-tooltip]');
-    if (!target || !target.hasAttribute('data-tooltip-active')) return;
+    if (!target || !activeTooltip) return;
 
-    const tooltip = document.querySelector('.dynamic-tooltip');
-    if (tooltip) {
-      tooltip.remove();
-    }
-    target.removeAttribute('data-tooltip-active');
-    target.removeEventListener('mousemove', positionTooltip);
+    activeTooltip.remove();
+    activeTooltip = null;
   });
+
+  window.addEventListener('scroll', function() {
+    if (activeTooltip) {
+      activeTooltip.remove();
+      activeTooltip = null;
+    }
+  }, true);
+
 })();
