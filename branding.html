@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/style.css"/>
   <script src="/layout.js" defer></script>
 </head>
-<body>
+<body class="branding-page">
   <div id="header-placeholder"></div>
   <main class="page">
     <div class="panel">
@@ -72,14 +72,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       const rootStyles = getComputedStyle(document.body);
 
-      const createTooltip = (text) => {
-        return `
-          <span class="tooltip-wrapper">
-            <span class="tooltip-trigger">?</span>
-            <span class="tooltip-content">${text}</span>
-          </span>`;
-      };
-
       const createSwatch = (container, { name, background, info }) => {
         const swatch = document.createElement('div');
         swatch.className = 'color-swatch';
@@ -101,7 +93,7 @@
       
       const accentTitle = document.querySelector('#accent-palette').previousElementSibling;
       const variableTooltipText = 'The Variable color is a dynamic accent used throughout the site. It can be changed to match a specific project\'s mood or for special events, providing contextual theming.';
-      accentTitle.innerHTML += createTooltip(variableTooltipText);
+      accentTitle.innerHTML = `<span>Accent Palette</span><span class="info-icon" data-tooltip="${variableTooltipText}"></span>`;
       
       const accentColors = [{ id: 'g', name: 'Jade' }, { id: 'b', name: 'Cobalt' }, { id: 'r', name: 'Garnet' }, { id: 'v', name: 'Variable' }];
       const accentPalette = document.getElementById('accent-palette');
@@ -113,22 +105,35 @@
       });
 
       const gradientTitle = document.querySelector('#gradient-palette').previousElementSibling;
-      const hueShift = rootStyles.getPropertyValue('--gradient-hue-shift').trim();
-      const lightnessShift = rootStyles.getPropertyValue('--gradient-lightness-shift').trim();
+      const hueShift = parseFloat(rootStyles.getPropertyValue('--gradient-hue-shift').trim());
+      const lightnessShift = parseFloat(rootStyles.getPropertyValue('--gradient-lightness-shift').trim());
       const angle = rootStyles.getPropertyValue('--gradient-angle').trim();
-      const gradientTooltipText = `Generated with: ${angle} angle, Hue Shift ±${hueShift}, Lightness Shift ±${lightnessShift}.`;
-      gradientTitle.innerHTML += createTooltip(gradientTooltipText);
+      const gradientTooltipText = `Generated with: ${angle} angle, Hue Shift ±${hueShift}, Lightness Shift ±${lightnessShift}%.`;
+      gradientTitle.innerHTML = `<span>Gradient Palette</span><span class="info-icon" data-tooltip="${gradientTooltipText}"></span>`;
       
       const gradientPalette = document.getElementById('gradient-palette');
       accentColors.forEach(color => {
-        createSwatch(gradientPalette, { name: color.name, background: `var(--color-a-${color.id}-g)`, info: `<p>HSL: <code class="copyable-gradient" data-variable="--color-a-${color.id}-g">calculated</code></p>` });
+        createSwatch(gradientPalette, { name: color.name, background: `var(--color-a-${color.id}-g)`, info: `<p>CSS: <code class="copyable copyable-gradient" data-color-id="${color.id}">calculated</code></p>` });
       });
 
-      document.querySelectorAll('.copyable, .copyable-gradient').forEach(el => {
+      document.querySelectorAll('.copyable').forEach(el => {
         el.addEventListener('click', () => {
           const originalText = el.textContent;
-          const isGradient = el.classList.contains('copyable-gradient');
-          const textToCopy = isGradient ? rootStyles.getPropertyValue(el.dataset.variable).trim() : originalText;
+          let textToCopy = originalText;
+
+          if (el.classList.contains('copyable-gradient')) {
+            const colorId = el.dataset.colorId;
+            const h = parseFloat(rootStyles.getPropertyValue(`--color-a-${colorId}-h`));
+            const s = rootStyles.getPropertyValue(`--color-a-${colorId}-s`).trim();
+            const l = parseFloat(rootStyles.getPropertyValue(`--color-a-${colorId}-l`));
+
+            const startH = h - hueShift;
+            const endH = h + hueShift;
+            const startL = l - lightnessShift;
+            const endL = l + lightnessShift;
+            
+            textToCopy = `linear-gradient(${angle}, hsl(${startH}, ${s}, ${startL}%), hsl(${endH}, ${s}, ${endL}%))`;
+          }
           
           navigator.clipboard.writeText(textToCopy).then(() => {
             el.textContent = 'Copied!';
