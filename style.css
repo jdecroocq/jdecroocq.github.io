@@ -1221,10 +1221,10 @@ footer a:hover {
 
 
 .palette-title {
-  margin-top: 5rem;
-  margin-bottom: 1rem;
+  margin-top: 64px;
+  margin-bottom: 24px;
   border-bottom: var(--border);
-  padding-bottom: 0.5rem;
+  padding-bottom: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1236,8 +1236,8 @@ footer a:hover {
 
 .color-palette {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 }
 
 .color-swatch {
@@ -1247,17 +1247,6 @@ footer a:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-@media (hover: hover) {
-  .color-swatch {
-    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  }
-
-  .color-swatch:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: var(--shadow);
-  }
 }
 
 .swatch-preview {
