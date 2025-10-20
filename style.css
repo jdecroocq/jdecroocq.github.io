@@ -317,7 +317,6 @@ a:hover {
 
 
 [data-tooltip] {
-  position: relative;
 }
 
 .dynamic-tooltip {
@@ -355,6 +354,7 @@ a:hover {
 .info-icon::before {
   content: '?';
 }
+
 
 #dark-overlay {
   position: fixed;
