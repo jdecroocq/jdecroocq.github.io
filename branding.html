@@ -86,14 +86,23 @@
       };
   
       const greyscalePalette = document.getElementById('greyscale-palette');
+      const greyH = rootStyles.getPropertyValue('--greyscale-h').trim();
+      const greyS = rootStyles.getPropertyValue('--greyscale-s').trim();
+
       for (let i = 0; i <= 5; i++) {
-        const rgbValue = rootStyles.getPropertyValue(`--color-${i}-rgb`).trim();
-        createSwatch(greyscalePalette, { name: `Color ${i}`, background: `var(--color-${i})`, info: `<p>RGB: <code class="copyable">${rgbValue}</code></p>` });
+        const greyL = rootStyles.getPropertyValue(`--color-${i}-l`).trim();
+        createSwatch(greyscalePalette, { 
+          name: `Color ${i}`, 
+          background: `var(--color-${i})`, 
+          info: `<p>HSL: <code class="copyable">${greyH}, ${greyS}, ${greyL}</code></p>` 
+        });
       }
       
       const accentTitle = document.querySelector('#accent-palette').previousElementSibling;
-      const variableTooltipText = 'The Variable color is a dynamic accent used throughout the site. It can be changed to match a specific project\'s mood or for special events, providing contextual theming.';
-      accentTitle.innerHTML = `<span>Accent Palette</span><span class="info-icon" data-tooltip="${variableTooltipText}"></span>`;
+      if (!accentTitle.querySelector('.info-icon')) {
+          const variableTooltipText = 'The Variable color is a dynamic accent used throughout the site. It can be changed to match a specific project\'s mood or for special events, providing contextual theming.';
+          accentTitle.innerHTML = `<span>Accent Palette</span><span class="info-icon" data-tooltip="${variableTooltipText}"></span>`;
+      }
       
       const accentColors = [{ id: 'g', name: 'Jade' }, { id: 'b', name: 'Cobalt' }, { id: 'r', name: 'Garnet' }, { id: 'v', name: 'Variable' }];
       const accentPalette = document.getElementById('accent-palette');
@@ -105,11 +114,13 @@
       });
   
       const gradientTitle = document.querySelector('#gradient-palette').previousElementSibling;
-      const hueShift = parseFloat(rootStyles.getPropertyValue('--gradient-hue-shift').trim());
-      const lightnessShift = parseFloat(rootStyles.getPropertyValue('--gradient-lightness-shift').trim());
-      const angle = rootStyles.getPropertyValue('--gradient-angle').trim();
-      const gradientTooltipText = `Based on the solid colors, each gradient has a ${angle} angle, a hue shift of ±${hueShift}, and a lightness shift of ±${lightnessShift}%.`;
-      gradientTitle.innerHTML = `<span>Gradient Palette</span><span class="info-icon" data-tooltip="${gradientTooltipText}"></span>`;
+      if (!gradientTitle.querySelector('.info-icon')) {
+          const hueShift = parseFloat(rootStyles.getPropertyValue('--gradient-hue-shift').trim());
+          const lightnessShift = parseFloat(rootStyles.getPropertyValue('--gradient-lightness-shift').trim());
+          const angle = rootStyles.getPropertyValue('--gradient-angle').trim();
+          const gradientTooltipText = `Based on the solid colors, each gradient has a ${angle} angle, a hue shift of ±${hueShift}, and a lightness shift of ±${lightnessShift}%.`;
+          gradientTitle.innerHTML = `<span>Gradient Palette</span><span class="info-icon" data-tooltip="${gradientTooltipText}"></span>`;
+      }
       
       const gradientPalette = document.getElementById('gradient-palette');
       accentColors.forEach(color => {
@@ -135,7 +146,7 @@
             const startL = l - lightnessShiftVal;
             const endL = l + lightnessShiftVal;
             
-            textToCopy = `linear-gradient(${angleVal}, hsl(${startH}, ${s}, ${startL}%), hsl(${endH}, ${s}, ${endL}%))`;
+            textToCopy = `linear-gradient(${angleVal}, hsl(${startH} ${s} ${startL}%), hsl(${endH} ${s} ${endL}%))`;
           }
           
           navigator.clipboard.writeText(textToCopy).then(() => {
