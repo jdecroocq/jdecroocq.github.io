@@ -34,7 +34,6 @@ async function loadProjectContent() {
     const projectList = await listResponse.json();
     const projectInfo = projectList.find(p => p.id === projectId);
     const projectTitle = projectInfo ? projectInfo.title : projectId;
-    document.title = projectTitle;
 
     let contentHTML = `<h2>${projectTitle}</h2><h5>Published on ${projectData.date}</h5>`;
     const formattedDescription = convertUrlsToLinks(projectData.description);
