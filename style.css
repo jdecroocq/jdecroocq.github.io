@@ -22,95 +22,89 @@ body {
   padding-top: var(--size-header);
 
 
-
-
   
-  --color-0-rgb: 0, 0, 0;
-  --color-1-rgb: 10, 10, 10;
-  --color-2-rgb: 20, 20, 20;
-  --color-3-rgb: 31, 31, 31;
-  --color-4-rgb: 160, 160, 160;
-  --color-5-rgb: 255, 255, 255;
+  --alpha-75: 0.75;
+  --alpha-50: 0.5;
+  --alpha-25: 0.25;
 
-  --color-a-g-h: 155;
-  --color-a-g-s: 78%;
-  --color-a-g-l: 51%;
-
-  --color-a-b-h: 228;
-  --color-a-b-s: 90%;
-  --color-a-b-l: 60%;
-
-  --color-a-r-h: 0;
-  --color-a-r-s: 60%;
-  --color-a-r-l: 54%;
-
-  --color-a-v-h: 155;
-  --color-a-v-s: 78%;
-  --color-a-v-l: 51%;
-
+  --greyscale-h: 0;
+  --greyscale-s: 0%;
 
   --gradient-angle: 45deg;
   --gradient-hue-shift: 10;
   --gradient-lightness-shift: 3%;
 
 
-  --color-a-g: hsl(var(--color-a-g-h), var(--color-a-g-s), var(--color-a-g-l));
-  --color-a-b: hsl(var(--color-a-b-h), var(--color-a-b-s), var(--color-a-b-l));
-  --color-a-r: hsl(var(--color-a-r-h), var(--color-a-r-s), var(--color-a-r-l));
-  --color-a-v: hsl(var(--color-a-v-h), var(--color-a-v-s), var(--color-a-v-l));
+  --color-0-l: 0%;
+  --color-1-l: 4%;
+  --color-2-l: 8%;
+  --color-3-l: 12%;
+  --color-4-l: 63%;
+  --color-5-l: 100%;
+
+
+  --color-a-g-h: 155; --color-a-g-s: 78%; --color-a-g-l: 51%;
+  --color-a-b-h: 228; --color-a-b-s: 90%; --color-a-b-l: 60%;
+  --color-a-r-h: 0;   --color-a-r-s: 60%; --color-a-r-l: 54%;
+  --color-a-v-h: 155; --color-a-v-s: 78%; --color-a-v-l: 51%;
+
+
+  --color-0: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-0-l));
+  --color-1: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-1-l));
+  --color-2: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-2-l));
+  --color-3: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-3-l));
+  --color-4: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-4-l));
+  --color-5: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-5-l));
+
+  --color-0-75: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-0-l) / var(--alpha-75));
+  --color-0-50: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-0-l) / var(--alpha-50));
+  --color-0-25: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-0-l) / var(--alpha-25));
+
+  --color-1-75: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-1-l) / var(--alpha-75));
+  --color-1-50: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-1-l) / var(--alpha-50));
+  --color-1-25: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-1-l) / var(--alpha-25));
+
+  --color-2-75: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-2-l) / var(--alpha-75));
+  --color-2-50: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-2-l) / var(--alpha-50));
+  --color-2-25: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-2-l) / var(--alpha-25));
+
+  --color-3-75: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-3-l) / var(--alpha-75));
+  --color-3-50: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-3-l) / var(--alpha-50));
+  --color-3-25: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-3-l) / var(--alpha-25));
+
+  --color-4-75: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-4-l) / var(--alpha-75));
+  --color-4-50: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-4-l) / var(--alpha-50));
+  --color-4-25: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-4-l) / var(--alpha-25));
+
+  --color-5-75: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-5-l) / var(--alpha-75));
+  --color-5-50: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-5-l) / var(--alpha-50));
+  --color-5-25: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-5-l) / var(--alpha-25));
+
+
+  --color-a-g: hsl(var(--color-a-g-h) var(--color-a-g-s) var(--color-a-g-l));
+  --color-a-b: hsl(var(--color-a-b-h) var(--color-a-b-s) var(--color-a-b-l));
+  --color-a-r: hsl(var(--color-a-r-h) var(--color-a-r-s) var(--color-a-r-l));
+  --color-a-v: hsl(var(--color-a-v-h) var(--color-a-v-s) var(--color-a-v-l));
+
 
   --color-a-g-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-g-h) - var(--gradient-hue-shift)), var(--color-a-g-s), calc(var(--color-a-g-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-g-h) + var(--gradient-hue-shift)), var(--color-a-g-s), calc(var(--color-a-g-l) + var(--gradient-lightness-shift)))
+    hsl(calc(var(--color-a-g-h) - var(--gradient-hue-shift)) var(--color-a-g-s) calc(var(--color-a-g-l) - var(--gradient-lightness-shift))),
+    hsl(calc(var(--color-a-g-h) + var(--gradient-hue-shift)) var(--color-a-g-s) calc(var(--color-a-g-l) + var(--gradient-lightness-shift)))
   );
   --color-a-b-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-b-h) - var(--gradient-hue-shift)), var(--color-a-b-s), calc(var(--color-a-b-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-b-h) + var(--gradient-hue-shift)), var(--color-a-b-s), calc(var(--color-a-b-l) + var(--gradient-lightness-shift)))
+    hsl(calc(var(--color-a-b-h) - var(--gradient-hue-shift)) var(--color-a-b-s) calc(var(--color-a-b-l) - var(--gradient-lightness-shift))),
+    hsl(calc(var(--color-a-b-h) + var(--gradient-hue-shift)) var(--color-a-b-s) calc(var(--color-a-b-l) + var(--gradient-lightness-shift)))
   );
   --color-a-r-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-r-h) - var(--gradient-hue-shift)), var(--color-a-r-s), calc(var(--color-a-r-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-r-h) + var(--gradient-hue-shift)), var(--color-a-r-s), calc(var(--color-a-r-l) + var(--gradient-lightness-shift)))
+    hsl(calc(var(--color-a-r-h) - var(--gradient-hue-shift)) var(--color-a-r-s) calc(var(--color-a-r-l) - var(--gradient-lightness-shift))),
+    hsl(calc(var(--color-a-r-h) + var(--gradient-hue-shift)) var(--color-a-r-s) calc(var(--color-a-r-l) + var(--gradient-lightness-shift)))
   );
   --color-a-v-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-v-h) - var(--gradient-hue-shift)), var(--color-a-v-s), calc(var(--color-a-v-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-v-h) + var(--gradient-hue-shift)), var(--color-a-v-s), calc(var(--color-a-v-l) + var(--gradient-lightness-shift)))
+    hsl(calc(var(--color-a-v-h) - var(--gradient-hue-shift)) var(--color-a-v-s) calc(var(--color-a-v-l) - var(--gradient-lightness-shift))),
+    hsl(calc(var(--color-a-v-h) + var(--gradient-hue-shift)) var(--color-a-v-s) calc(var(--color-a-v-l) + var(--gradient-lightness-shift)))
   );
 
 
-  --alpha-75: 0.75;
-  --alpha-50: 0.5;
-  --alpha-25: 0.25;
-  
-
-  --color-0: rgb(var(--color-0-rgb));
-  --color-0-75: rgba(var(--color-0-rgb), var(--alpha-75));
-  --color-0-50: rgba(var(--color-0-rgb), var(--alpha-50));
-  --color-0-25: rgba(var(--color-0-rgb), var(--alpha-25));
-
-  --color-1: rgb(var(--color-1-rgb));
-  --color-1-75: rgba(var(--color-1-rgb), var(--alpha-75));
-  --color-1-50: rgba(var(--color-1-rgb), var(--alpha-50));
-  --color-1-25: rgba(var(--color-1-rgb), var(--alpha-25));
-
-  --color-2: rgb(var(--color-2-rgb));
-  --color-2-75: rgba(var(--color-2-rgb), var(--alpha-75));
-  --color-2-50: rgba(var(--color-2-rgb), var(--alpha-50));
-  --color-2-25: rgba(var(--color-2-rgb), var(--alpha-25));
-
-  --color-3: rgb(var(--color-3-rgb));
-  --color-3-75: rgba(var(--color-3-rgb), var(--alpha-75));
-  --color-3-50: rgba(var(--color-3-rgb), var(--alpha-50));
-  --color-3-25: rgba(var(--color-3-rgb), var(--alpha-25));
-
-  --color-4: rgb(var(--color-4-rgb));
-  --color-4-75: rgba(var(--color-4-rgb), var(--alpha-75));
-  --color-4-50: rgba(var(--color-4-rgb), var(--alpha-50));
-  --color-4-25: rgba(var(--color-4-rgb), var(--alpha-25));
-
-  --color-5: rgb(var(--color-5-rgb));
-  --color-5-75: rgba(var(--color-5-rgb), var(--alpha-75));
-  --color-5-50: rgba(var(--color-5-rgb), var(--alpha-50));
-  --color-5-25: rgba(var(--color-5-rgb), var(--alpha-25));
   
 
   --size-header: 64px;
@@ -152,12 +146,12 @@ body {
 }
 
 body.light-mode {
-  --color-0-rgb: 255, 255, 255;
-  --color-1-rgb: 245, 245, 245;
-  --color-2-rgb: 235, 235, 235;
-  --color-3-rgb: 225, 225, 225;
-  --color-4-rgb: 95, 95, 95;
-  --color-5-rgb: 0, 0, 0;
+  --color-0-l: 100%;
+  --color-1-l: 96%;
+  --color-2-l: 92%;
+  --color-3-l: 88%;
+  --color-4-l: 37%;
+  --color-5-l: 0%; 
 
   --shadow-i: 0.1;
 }
