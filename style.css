@@ -1216,6 +1216,10 @@ footer a:hover {
 
 
 
+.branding-page h1 + p {
+  margin-top: 1rem;
+}
+
 .palette-title {
   margin-top: 64px;
   margin-bottom: 16px;
