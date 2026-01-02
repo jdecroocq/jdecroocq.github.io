@@ -1,0 +1,6 @@
+{
+  "date": "02/01/2026",
+  "description": "This project is a short personal work created during my free time over the course of one week. After several months without opening Blender due to intensive CPGE studies, I wanted to take advantage of the holidays to practice again and avoid losing my skills.\nThe main goal of this project was to achieve a high level of photorealism (even if not perfect), focusing on an interior brutalist architecture atmosphere. A significant part of the work was dedicated to the concrete materials, which were entirely created using procedural textures.\n\nWorkflow\n- Modeling and asset creation with Blender.\n- Procedural concrete texturing developed entirely within Blender.\n- Rendering with Cycles - EXR (Linear Rec.709) – 2000×3000 px – approximately 1 hour per frame with 1024 samples.\n- Compositing and post-production carried out with DaVinci Resolve.\n\nPC configuration\n- 16 GB DDR5\n- Intel Core i7-12700H\n- NVIDIA GeForce RTX 3050",
+  "youtubeId": "",
+  "imageCount": 9
+}
