@@ -421,6 +421,7 @@ header {
   border: none;
   cursor: pointer;
   color: var(--color-5);
+  overflow: hidden;
 }
 
 .header-interactive:hover {
@@ -439,16 +440,12 @@ header {
   width: 100%;
   height: 2px;
   background-color: var(--color-5);
-  transform: scaleX(0);
-  transform-origin: var(--origin-out, right);
-  transition: transform 0.2s ease-out;
+  transform: translateX(var(--bar-tx, -101%));
+  transition: transform 0.25s ease-out;
 }
 
-@media (hover: hover) {
-  .header-interactive:hover::after {
-    transform: scaleX(1);
-    transform-origin: var(--origin-in, left);
-  }
+.header-interactive.no-transition::after {
+  transition: none;
 }
 
 .theme-switch-icon {
