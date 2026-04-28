@@ -1,13 +1,3 @@
-(function() {
-  const fontLink = document.createElement('link');
-  fontLink.rel = 'preload';
-  fontLink.as = 'font';
-  fontLink.type = 'font/woff2';
-  fontLink.href = '/fonts/orkney-regular-webfont.woff2';
-  fontLink.crossOrigin = 'anonymous';
-  document.head.appendChild(fontLink);
-})();
-
 const headerHTML = `
 <header>
   <div class="header-main">
