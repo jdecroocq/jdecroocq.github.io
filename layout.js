@@ -109,36 +109,43 @@ const headerHTML = `
     });
   }
 
-  let currentEl = null;
-  const HIDDEN_L = 'inset(0 100% 0 0%)';
-  const HIDDEN_R = 'inset(0 0% 0 100%)';
-  const VISIBLE  = 'inset(0 0% 0 0%)';
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let currentEl = null;
+    const HIDDEN_L = 'inset(0 100% 0 0%)';
+    const HIDDEN_R = 'inset(0 0% 0 100%)';
+    const VISIBLE  = 'inset(0 0% 0 0%)';
   
-  document.querySelectorAll('.header-interactive').forEach(el => {
-    el.addEventListener('mouseenter', e => {
-      const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
+    document.querySelectorAll('.header-interactive').forEach(el => {
+      el.addEventListener('mouseenter', e => {
+        const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
   
-      if (currentEl && currentEl !== el) {
-        currentEl.style.setProperty('--bar-duration', '0s');
-        currentEl.style.setProperty('--bar-clip', fromLeft ? HIDDEN_R : HIDDEN_L);
-      }
+        if (currentEl && currentEl !== el) {
+          currentEl.style.setProperty('--bar-duration', '0s');
+          currentEl.style.setProperty('--bar-clip', fromLeft ? HIDDEN_R : HIDDEN_L);
+        }
   
-      currentEl = el;
-      el.style.setProperty('--bar-duration', '0.25s');
-      el.style.setProperty('--bar-clip', fromLeft ? HIDDEN_L : HIDDEN_R);
-      el.getBoundingClientRect();
-      requestAnimationFrame(() => el.style.setProperty('--bar-clip', VISIBLE));
+        currentEl = el;
+  
+        el.style.setProperty('--bar-duration', '0.25s');
+        el.style.setProperty('--bar-clip', fromLeft ? HIDDEN_L : HIDDEN_R);
+        
+        el.getBoundingClientRect(); 
+
+        requestAnimationFrame(() => el.style.setProperty('--bar-clip', VISIBLE));
+      });
+  
+      el.addEventListener('mouseleave', e => {
+        if (currentEl !== el) return;
+
+        const toRight = e.clientX > el.getBoundingClientRect().left + el.offsetWidth / 2;
+
+        el.style.setProperty('--bar-duration', '0.25s');
+        el.style.setProperty('--bar-clip', toRight ? HIDDEN_R : HIDDEN_L);
+  
+        currentEl = null;
+      });
     });
-  
-    el.addEventListener('mouseleave', e => {
-      if (currentEl !== el) return;
-      currentEl = null;
-      const rect = el.getBoundingClientRect();
-      const toRight = e.clientX > rect.left + rect.width / 2;
-      el.style.setProperty('--bar-duration', '0.25s');
-      el.style.setProperty('--bar-clip', toRight ? HIDDEN_R : HIDDEN_L);
-    });
-  });
+  }
 })();
 
 
