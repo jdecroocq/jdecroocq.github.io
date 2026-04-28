@@ -421,6 +421,7 @@ header {
   border: none;
   cursor: pointer;
   color: var(--color-5);
+  overflow: hidden;
 }
 
 .header-interactive:hover {
@@ -439,9 +440,9 @@ header {
   width: 100%;
   height: 2px;
   background-color: var(--color-5);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.2s ease-out;
+  transform: translateX(var(--bar-tx, -101%));
+  transition: transform var(--bar-duration, 0.25s) ease-out;
+  pointer-events: none;
 }
 
 @media (hover: hover) {
