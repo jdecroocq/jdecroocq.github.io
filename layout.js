@@ -110,14 +110,17 @@ const headerHTML = `
   }
 
   let currentEl = null;
-  
+
   document.querySelectorAll('.header-interactive').forEach(el => {
+  
     el.addEventListener('mouseenter', e => {
       const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
   
       if (currentEl && currentEl !== el) {
         currentEl.classList.add('no-transition');
         currentEl.style.setProperty('--bar-tx', fromLeft ? '101%' : '-101%');
+        currentEl.getBoundingClientRect();
+        currentEl.classList.remove('no-transition');
       }
   
       currentEl = el;
@@ -125,7 +128,11 @@ const headerHTML = `
       el.style.setProperty('--bar-tx', fromLeft ? '-101%' : '101%');
       el.getBoundingClientRect();
       el.classList.remove('no-transition');
-      requestAnimationFrame(() => el.style.setProperty('--bar-tx', '0%'));
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.setProperty('--bar-tx', '0%');
+        });
+      });
     });
   
     el.addEventListener('mouseleave', e => {
@@ -135,6 +142,7 @@ const headerHTML = `
       const toRight = e.clientX > rect.left + rect.width / 2;
       el.style.setProperty('--bar-tx', toRight ? '101%' : '-101%');
     });
+  
   });
 })();
 
