@@ -3,20 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details</title>
   <link rel="icon" type="image/png" href="/icons/ico.png"/>
   <link rel="stylesheet" href="/style.css"/>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const projectId = urlParams.get('id');
-    if (projectId) {
-      fetch('/projects/projects-list.json')
-        .then(response => response.json())
-        .then(projects => {
-          const project = projects.find(p => p.id === projectId);
-          if (project) document.title = project.title;
-        });
-    }
-  </script>
   <script src="/layout.js" defer></script>
   <script type="module" src="/project_details.js"></script>
 </head>
