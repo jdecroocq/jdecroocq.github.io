@@ -109,66 +109,36 @@ const headerHTML = `
     });
   }
 
+  let currentEl = null;
+  const HIDDEN_L = 'inset(0 100% 0 0%)';
+  const HIDDEN_R = 'inset(0 0% 0 100%)';
+  const VISIBLE  = 'inset(0 0% 0 0%)';
   
-  (function () {
-    const header = document.querySelector('header');
-    if (!header) return;
+  document.querySelectorAll('.header-interactive').forEach(el => {
+    el.addEventListener('mouseenter', e => {
+      const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
   
-    const bar = document.createElement('div');
-    bar.className = 'header-bar';
-    header.appendChild(bar);
+      if (currentEl && currentEl !== el) {
+        currentEl.style.setProperty('--bar-duration', '0s');
+        currentEl.style.setProperty('--bar-clip', fromLeft ? HIDDEN_R : HIDDEN_L);
+      }
   
-    let visible = false;
-    let activeEl = null;
-  
-    function getPos(el) {
-      const r = el.getBoundingClientRect();
-      const h = header.getBoundingClientRect();
-      return { left: r.left - h.left, width: r.width };
-    }
-  
-    document.querySelectorAll('.header-interactive').forEach(el => {
-      el.addEventListener('mouseenter', e => {
-        const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
-        const pos = getPos(el);
-        activeEl = el;
-  
-        if (!visible) {
-          bar.style.transition = 'none';
-          bar.style.left = pos.left + 'px';
-          bar.style.width = pos.width + 'px';
-          bar.style.transformOrigin = fromLeft ? 'left' : 'right';
-          bar.style.transform = 'scaleX(0)';
-          bar.getBoundingClientRect();
-          visible = true;
-          requestAnimationFrame(() => {
-            bar.style.transition = 'transform 0.25s ease-out';
-            bar.style.transform = 'scaleX(1)';
-          });
-        } else {
-          bar.style.transition = 'none';
-          bar.style.transform = 'scaleX(1)';
-          bar.getBoundingClientRect();
-          bar.style.transition = 'left 0.25s ease-out, width 0.25s ease-out';
-          bar.style.left = pos.left + 'px';
-          bar.style.width = pos.width + 'px';
-        }
-      });
-  
-      el.addEventListener('mouseleave', e => {
-        if (activeEl !== el) return;
-        const related = e.relatedTarget;
-        if (related && typeof related.closest === 'function' && related.closest('.header-interactive')) return;
-        activeEl = null;
-        visible = false;
-        const rect = el.getBoundingClientRect();
-        const toRight = e.clientX > rect.left + rect.width / 2;
-        bar.style.transition = 'transform 0.25s ease-out';
-        bar.style.transformOrigin = toRight ? 'right' : 'left';
-        bar.style.transform = 'scaleX(0)';
-      });
+      currentEl = el;
+      el.style.setProperty('--bar-duration', '0.25s');
+      el.style.setProperty('--bar-clip', fromLeft ? HIDDEN_L : HIDDEN_R);
+      el.getBoundingClientRect();
+      requestAnimationFrame(() => el.style.setProperty('--bar-clip', VISIBLE));
     });
-  })();
+  
+    el.addEventListener('mouseleave', e => {
+      if (currentEl !== el) return;
+      currentEl = null;
+      const rect = el.getBoundingClientRect();
+      const toRight = e.clientX > rect.left + rect.width / 2;
+      el.style.setProperty('--bar-duration', '0.25s');
+      el.style.setProperty('--bar-clip', toRight ? HIDDEN_R : HIDDEN_L);
+    });
+  });
 })();
 
 
