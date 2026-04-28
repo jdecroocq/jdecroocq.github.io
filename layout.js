@@ -110,38 +110,14 @@ const headerHTML = `
   }
 
   document.querySelectorAll('.header-interactive').forEach(el => {
-    let state = 'idle'; // idle → entering → active → leaving → idle
-    let deferredDir = null;
-  
-    function leave(dir) {
-      el.style.setProperty('--origin-out', dir);
-      state = 'leaving';
-      el.classList.remove('hovered');
-    }
-  
     el.addEventListener('mouseenter', e => {
       const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
       el.style.setProperty('--origin-in', fromLeft ? 'left' : 'right');
-      deferredDir = null;
-      state = 'entering';
-      el.classList.add('hovered');
     });
   
     el.addEventListener('mouseleave', e => {
       const toRight = e.clientX > el.getBoundingClientRect().left + el.offsetWidth / 2;
-      const dir = toRight ? 'right' : 'left';
-      if (state === 'entering') { deferredDir = dir; return; }
-      leave(dir);
-    });
-  
-    el.addEventListener('transitionend', e => {
-      if (e.propertyName !== 'transform') return;
-      if (state === 'entering') {
-        state = 'active';
-        if (deferredDir) { leave(deferredDir); deferredDir = null; }
-      } else if (state === 'leaving') {
-        state = 'idle';
-      }
+      el.style.setProperty('--origin-out', toRight ? 'right' : 'left');
     });
   });
 })();
