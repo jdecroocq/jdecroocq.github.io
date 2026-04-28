@@ -410,6 +410,22 @@ header {
   height: 100%;
 }
 
+.header-interactive {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-5);
+}
+
+.header-interactive:hover {
+  text-decoration: none;
+}
 
 .header-bar {
   position: absolute;
@@ -429,12 +445,12 @@ header {
   transition: none;
 }
 
-
-
-
-
 .burger {
   display: none;
+}
+
+.header-interactive.no-transition::after {
+  transition: none;
 }
 
 .theme-switch-icon {
