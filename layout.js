@@ -108,41 +108,6 @@ const headerHTML = `
       }
     });
   }
-
-  const bar = document.createElement('div');
-  bar.className = 'header-bar';
-  document.querySelector('header').appendChild(bar);
-  
-  let visible = false;
-  
-  document.querySelectorAll('.header-interactive').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      const rect = el.getBoundingClientRect();
-      const headerRect = el.closest('header').getBoundingClientRect();
-  
-      if (!visible) {
-        bar.classList.add('no-transition');
-      }
-  
-      bar.style.left  = (rect.left - headerRect.left) + 'px';
-      bar.style.width = rect.width + 'px';
-  
-      if (!visible) {
-        bar.getBoundingClientRect();
-        bar.classList.remove('no-transition');
-        visible = true;
-      }
-  
-      bar.classList.add('visible');
-    });
-  
-    el.addEventListener('mouseleave', e => {
-      if (!e.relatedTarget?.closest('.header-interactive')) {
-        bar.classList.remove('visible');
-        visible = false;
-      }
-    });
-  });
 })();
 
 
