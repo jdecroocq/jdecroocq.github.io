@@ -109,40 +109,39 @@ const headerHTML = `
     });
   }
 
-  let currentEl = null;
-
+  const bar = document.createElement('div');
+  bar.className = 'header-bar';
+  document.querySelector('header').appendChild(bar);
+  
+  let visible = false;
+  
   document.querySelectorAll('.header-interactive').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      const rect = el.getBoundingClientRect();
+      const headerRect = el.closest('header').getBoundingClientRect();
   
-    el.addEventListener('mouseenter', e => {
-      const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
-  
-      if (currentEl && currentEl !== el) {
-        currentEl.classList.add('no-transition');
-        currentEl.style.setProperty('--bar-tx', fromLeft ? '101%' : '-101%');
-        currentEl.getBoundingClientRect();
-        currentEl.classList.remove('no-transition');
+      if (!visible) {
+        bar.classList.add('no-transition');
       }
   
-      currentEl = el;
-      el.classList.add('no-transition');
-      el.style.setProperty('--bar-tx', fromLeft ? '-101%' : '101%');
-      el.getBoundingClientRect();
-      el.classList.remove('no-transition');
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          el.style.setProperty('--bar-tx', '0%');
-        });
-      });
+      bar.style.left  = (rect.left - headerRect.left) + 'px';
+      bar.style.width = rect.width + 'px';
+  
+      if (!visible) {
+        bar.getBoundingClientRect();
+        bar.classList.remove('no-transition');
+        visible = true;
+      }
+  
+      bar.classList.add('visible');
     });
   
     el.addEventListener('mouseleave', e => {
-      if (currentEl !== el) return;
-      currentEl = null;
-      const rect = el.getBoundingClientRect();
-      const toRight = e.clientX > rect.left + rect.width / 2;
-      el.style.setProperty('--bar-tx', toRight ? '101%' : '-101%');
+      if (!e.relatedTarget?.closest('.header-interactive')) {
+        bar.classList.remove('visible');
+        visible = false;
+      }
     });
-  
   });
 })();
 
