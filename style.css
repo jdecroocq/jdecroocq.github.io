@@ -441,11 +441,11 @@ header {
   background-color: var(--color-5);
   transform: scaleX(0);
   transform-origin: var(--origin-out, right);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-out;
 }
 
 @media (hover: hover) {
-  .header-interactive.hovered::after {
+  .header-interactive:hover::after {
     transform: scaleX(1);
     transform-origin: var(--origin-in, left);
   }
