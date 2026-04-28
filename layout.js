@@ -143,12 +143,12 @@ const headerHTML = `
             
             void hoverLine.offsetHeight;
             
-            hoverLine.style.transition = 'transform 0.25s ease-out';
+            hoverLine.style.transition = 'transform var(--line-duration-io) var(--line-curve-io)';
             hoverLine.style.transform = 'scaleX(1)';
             
             isHovering = true;
           } else {
-            hoverLine.style.transition = 'left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            hoverLine.style.transition = 'transform var(--line-duration-io) var(--line-curve-io)';
             hoverLine.style.left = targetLeft + 'px';
             hoverLine.style.width = targetWidth + 'px';
           }
@@ -164,7 +164,7 @@ const headerHTML = `
           const toRight = e.clientX > rect.left + rect.width / 2;
   
           leaveTimeout = setTimeout(() => {
-            hoverLine.style.transition = 'transform 0.25s ease-out';
+            hoverLine.style.transition = 'transform var(--line-duration-io) var(--line-curve-io)';
             hoverLine.style.transformOrigin = toRight ? 'right' : 'left';
             hoverLine.style.transform = 'scaleX(0)';
             isHovering = false;
