@@ -42,11 +42,8 @@ body {
   --color-4-l: 63%;
   --color-5-l: 100%;
 
-
-  --color-a-g-h: 155; --color-a-g-s: 78%; --color-a-g-l: 51%;
-  --color-a-b-h: 228; --color-a-b-s: 90%; --color-a-b-l: 60%;
-  --color-a-r-h: 0;   --color-a-r-s: 60%; --color-a-r-l: 54%;
-  --color-a-v-h: 155; --color-a-v-s: 78%; --color-a-v-l: 51%;
+  
+  --color-a-h: 155; --color-a-s: 78%; --color-a-l: 51%;
 
 
   --color-0: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-0-l));
@@ -81,27 +78,12 @@ body {
   --color-5-25: hsl(var(--greyscale-h) var(--greyscale-s) var(--color-5-l) / var(--alpha-25));
 
 
-  --color-a-g: hsl(var(--color-a-g-h) var(--color-a-g-s) var(--color-a-g-l));
-  --color-a-b: hsl(var(--color-a-b-h) var(--color-a-b-s) var(--color-a-b-l));
-  --color-a-r: hsl(var(--color-a-r-h) var(--color-a-r-s) var(--color-a-r-l));
-  --color-a-v: hsl(var(--color-a-v-h) var(--color-a-v-s) var(--color-a-v-l));
+  --color-a: hsl(var(--color-a-h) var(--color-a-s) var(--color-a-l));
 
 
-  --color-a-g-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-g-h) - var(--gradient-hue-shift)) var(--color-a-g-s) calc(var(--color-a-g-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-g-h) + var(--gradient-hue-shift)) var(--color-a-g-s) calc(var(--color-a-g-l) + var(--gradient-lightness-shift)))
-  );
-  --color-a-b-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-b-h) - var(--gradient-hue-shift)) var(--color-a-b-s) calc(var(--color-a-b-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-b-h) + var(--gradient-hue-shift)) var(--color-a-b-s) calc(var(--color-a-b-l) + var(--gradient-lightness-shift)))
-  );
-  --color-a-r-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-r-h) - var(--gradient-hue-shift)) var(--color-a-r-s) calc(var(--color-a-r-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-r-h) + var(--gradient-hue-shift)) var(--color-a-r-s) calc(var(--color-a-r-l) + var(--gradient-lightness-shift)))
-  );
-  --color-a-v-g: linear-gradient(var(--gradient-angle),
-    hsl(calc(var(--color-a-v-h) - var(--gradient-hue-shift)) var(--color-a-v-s) calc(var(--color-a-v-l) - var(--gradient-lightness-shift))),
-    hsl(calc(var(--color-a-v-h) + var(--gradient-hue-shift)) var(--color-a-v-s) calc(var(--color-a-v-l) + var(--gradient-lightness-shift)))
+  --color-a-g: linear-gradient(var(--gradient-angle),
+    hsl(calc(var(--color-a-h) - var(--gradient-hue-shift)) var(--color-a-s) calc(var(--color-a-l) - var(--gradient-lightness-shift))),
+    hsl(calc(var(--color-a-h) + var(--gradient-hue-shift)) var(--color-a-s) calc(var(--color-a-l) + var(--gradient-lightness-shift)))
   );
 
 
@@ -132,7 +114,7 @@ body {
 
   --border: var(--size-border) solid var(--color-border);
   --border-d: var(--size-border) dashed var(--color-border);
-  --border-a: var(--size-border) solid var(--color-a-v);
+  --border-a: var(--size-border) solid var(--color-a);
   --border-radius-1: 8px;
   --border-radius-2: 16px;
   --border-shadow: inset 0 -1px 0px var(--color-border);
@@ -202,7 +184,7 @@ h4 {
 h4::before {
   content: "✦";
   margin-right: 0.5rem;
-  color: var(--color-a-v);
+  color: var(--color-a);
 }
 
 h5 {
@@ -230,7 +212,7 @@ li {
 }
 
 a {
-  color: var(--color-a-v);
+  color: var(--color-a);
   text-decoration: none;
 }
 
@@ -292,7 +274,7 @@ a:hover {
   font-size: 18px;
   padding: 16px 20px;
   display: inline-block;
-  background: var(--color-a-v-g);
+  background: var(--color-a-g);
   color: var(--color-0);
   border-radius: var(--border-radius-1);
   text-decoration: none !important;
@@ -305,7 +287,7 @@ a:hover {
 
 .green-button:hover {
   background: transparent;
-  color: var(--color-a-v) !important;
+  color: var(--color-a) !important;
   border: var(--border-a);
 }
 
