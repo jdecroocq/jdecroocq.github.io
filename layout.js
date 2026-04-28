@@ -1,3 +1,13 @@
+(function() {
+  const fontLink = document.createElement('link');
+  fontLink.rel = 'preload';
+  fontLink.as = 'font';
+  fontLink.type = 'font/woff2';
+  fontLink.href = '/fonts/orkney-regular-webfont.woff2';
+  fontLink.crossOrigin = 'anonymous';
+  document.head.appendChild(fontLink);
+})();
+
 const headerHTML = `
 <header>
   <div class="header-main">
@@ -195,73 +205,3 @@ document.addEventListener('click', function (e) {
     });
   }
 });
-
-
-
-
-
-(function () {
-  let activeTooltip = null;
-
-  function positionTooltip(target, tooltip) {
-    if (!target || !tooltip) return;
-
-    const rect = target.getBoundingClientRect();
-    const tooltipRect = tooltip.getBoundingClientRect();
-    const margin = 16;
-
-    let finalTop, finalLeft;
-
-    if (rect.top > tooltipRect.height + margin) {
-      finalTop = rect.top - tooltipRect.height - margin;
-    } else {
-      finalTop = rect.bottom + margin;
-    }
-    if (finalTop < margin) {
-      finalTop = margin;
-    } else if (finalTop + tooltipRect.height > window.innerHeight - margin) {
-      finalTop = window.innerHeight - tooltipRect.height - margin;
-    }
-
-    let idealLeft = rect.left + (rect.width / 2) - (tooltipRect.width / 2);
-    
-    if (idealLeft < margin) {
-      finalLeft = margin;
-    } else if (idealLeft + tooltipRect.width > window.innerWidth - margin) {
-      finalLeft = window.innerWidth - tooltipRect.width - margin;
-    } else {
-      finalLeft = idealLeft;
-    }
-
-    tooltip.style.top = `${finalTop + window.scrollY}px`;
-    tooltip.style.left = `${finalLeft + window.scrollX}px`;
-  }
-
-  document.body.addEventListener('mouseover', function (e) {
-    const target = e.target.closest('[data-tooltip]');
-    if (!target || activeTooltip) return;
-
-    activeTooltip = document.createElement('div');
-    activeTooltip.className = 'dynamic-tooltip';
-    activeTooltip.textContent = target.getAttribute('data-tooltip');
-    document.body.appendChild(activeTooltip);
-
-    positionTooltip(target, activeTooltip);
-  });
-
-  document.body.addEventListener('mouseout', function (e) {
-    const target = e.target.closest('[data-tooltip]');
-    if (!target || !activeTooltip) return;
-
-    activeTooltip.remove();
-    activeTooltip = null;
-  });
-
-  window.addEventListener('scroll', function() {
-    if (activeTooltip) {
-      activeTooltip.remove();
-      activeTooltip = null;
-    }
-  }, true);
-
-})();
