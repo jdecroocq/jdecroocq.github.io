@@ -116,10 +116,11 @@ const headerHTML = `
       el.style.setProperty('--origin-in', fromLeft ? 'left' : 'right');
     });
   
-  el.addEventListener('mouseleave', e => {
-    const rect = el.getBoundingClientRect();
-    const toRight = e.clientX > rect.left + rect.width / 2;
-    el.style.setProperty('--origin-out', toRight ? 'right' : 'left');
+    el.addEventListener('mouseleave', e => {
+      const rect = el.getBoundingClientRect();
+      const toRight = e.clientX > rect.left + rect.width / 2;
+      el.style.setProperty('--origin-out', toRight ? 'right' : 'left');
+    });
   });
 })();
 
