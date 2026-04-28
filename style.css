@@ -427,6 +427,10 @@ header {
   text-decoration: none;
 }
 
+.burger {
+  display: none;
+}
+
 .header-interactive::after {
   content: '';
   position: absolute;
@@ -435,13 +439,9 @@ header {
   width: 100%;
   height: 2px;
   background-color: var(--color-5);
-  clip-path: var(--bar-clip, inset(0 100% 0 0%));
+  clip-path: var(--bar-clip, inset(0 100% 0 0%)); 
   transition: clip-path var(--bar-duration, 0.25s) ease-out;
   pointer-events: none;
-}
-
-.burger {
-  display: none;
 }
 
 .theme-switch-icon {
