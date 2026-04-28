@@ -445,7 +445,7 @@ header {
 }
 
 @media (hover: hover) {
-  .header-interactive:hover::after {
+  .header-interactive.hovered::after {
     transform: scaleX(1);
     transform-origin: var(--origin-in, left);
   }
