@@ -108,6 +108,34 @@ const headerHTML = `
       }
     });
   }
+
+  let currentEl = null;
+
+  document.querySelectorAll('.header-interactive').forEach(el => {
+    el.addEventListener('mouseenter', e => {
+      const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
+  
+      if (currentEl && currentEl !== el) {
+        currentEl.style.setProperty('--bar-duration', '0s');
+        currentEl.style.setProperty('--bar-tx', fromLeft ? '101%' : '-101%');
+      }
+  
+      currentEl = el;
+      el.style.setProperty('--bar-duration', '0.25s');
+      el.style.setProperty('--bar-tx', fromLeft ? '-101%' : '101%');
+      el.getBoundingClientRect();
+      requestAnimationFrame(() => el.style.setProperty('--bar-tx', '0%'));
+    });
+  
+    el.addEventListener('mouseleave', e => {
+      if (currentEl !== el) return;
+      currentEl = null;
+      const rect = el.getBoundingClientRect();
+      const toRight = e.clientX > rect.left + rect.width / 2;
+      el.style.setProperty('--bar-duration', '0.25s');
+      el.style.setProperty('--bar-tx', toRight ? '101%' : '-101%');
+    });
+  });
 })();
 
 
