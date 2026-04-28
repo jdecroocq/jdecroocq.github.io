@@ -119,7 +119,7 @@ const headerHTML = `
     el.addEventListener('mouseleave', e => {
       const rect = el.getBoundingClientRect();
       const toRight = e.clientX > rect.left + rect.width / 2;
-      el.style.setProperty('--origin-out', toRight ? 'left' : 'right');
+      el.style.setProperty('--origin-out', toRight ? 'right' : 'left');
     });
   });
 })();
