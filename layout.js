@@ -109,45 +109,70 @@ const headerHTML = `
     });
   }
 
-  let currentEl = null;
-    const HIDDEN_L = 'inset(0 100% 0 0%)';
-    const HIDDEN_R = 'inset(0 0% 0 100%)';
-    const VISIBLE  = 'inset(0 0% 0 0%)';
+  const headerMain = document.querySelector('.header-main');
+    
+    if (headerMain) {
+      const hoverLine = document.createElement('div');
+      hoverLine.className = 'header-hover-line';
+      hoverLine.style.transform = 'scaleX(0)';
+      headerMain.appendChild(hoverLine);
   
-    document.querySelectorAll('.header-interactive').forEach(el => {
-      el.addEventListener('mouseenter', e => {
-        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      let isHovering = false;
+      let leaveTimeout = null;
+      let currentItem = null;
   
-        const rect = el.getBoundingClientRect();
-        const fromLeft = e.clientX < rect.left + rect.width / 2;
+      document.querySelectorAll('.header-interactive').forEach(el => {
+        el.addEventListener('mouseenter', e => {
+          if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   
-        if (currentEl && currentEl !== el) {
-          currentEl.style.setProperty('--bar-duration', '0s');
-          currentEl.style.setProperty('--bar-clip', fromLeft ? HIDDEN_R : HIDDEN_L);
-        }
+          clearTimeout(leaveTimeout);
   
-        currentEl = el;
-        el.style.setProperty('--bar-duration', '0s');
-        el.style.setProperty('--bar-clip', fromLeft ? HIDDEN_L : HIDDEN_R);
-        
-        void el.offsetHeight;
-        
-        el.style.setProperty('--bar-duration', '0.25s');
-        el.style.setProperty('--bar-clip', VISIBLE);
+          const rect = el.getBoundingClientRect();
+          const parentRect = headerMain.getBoundingClientRect();
+          const targetLeft = rect.left - parentRect.left;
+          const targetWidth = rect.width;
+  
+          if (!isHovering) {
+            const fromLeft = e.clientX < rect.left + rect.width / 2;
+            
+            hoverLine.style.transition = 'none';
+            hoverLine.style.left = targetLeft + 'px';
+            hoverLine.style.width = targetWidth + 'px';
+            hoverLine.style.transformOrigin = fromLeft ? 'left' : 'right';
+            hoverLine.style.transform = 'scaleX(0)';
+            
+            void hoverLine.offsetHeight;
+            
+            hoverLine.style.transition = 'transform 0.25s ease-out';
+            hoverLine.style.transform = 'scaleX(1)';
+            
+            isHovering = true;
+          } else {
+            hoverLine.style.transition = 'left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            hoverLine.style.left = targetLeft + 'px';
+            hoverLine.style.width = targetWidth + 'px';
+          }
+          
+          currentItem = el;
+        });
+  
+        el.addEventListener('mouseleave', e => {
+          if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+          if (currentItem !== el) return;
+  
+          const rect = el.getBoundingClientRect();
+          const toRight = e.clientX > rect.left + rect.width / 2;
+  
+          leaveTimeout = setTimeout(() => {
+            hoverLine.style.transition = 'transform 0.25s ease-out';
+            hoverLine.style.transformOrigin = toRight ? 'right' : 'left';
+            hoverLine.style.transform = 'scaleX(0)';
+            isHovering = false;
+            currentItem = null;
+          }, 30);
+        });
       });
-  
-      el.addEventListener('mouseleave', e => {
-        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-        if (currentEl !== el) return;
-        
-        currentEl = null;
-        const rect = el.getBoundingClientRect();
-        const toRight = e.clientX > rect.left + rect.width / 2;
-        
-        el.style.setProperty('--bar-duration', '0.25s');
-        el.style.setProperty('--bar-clip', toRight ? HIDDEN_R : HIDDEN_L);
-      });
-    });
+    }
 })();
 
 
