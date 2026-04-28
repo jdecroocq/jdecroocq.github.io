@@ -108,6 +108,14 @@ const headerHTML = `
       }
     });
   }
+
+  document.querySelectorAll('.header-interactive').forEach(el => {
+    el.addEventListener('mouseenter', e => {
+      const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
+      el.style.setProperty('--origin-in',  fromLeft ? 'left'  : 'right');
+      el.style.setProperty('--origin-out', fromLeft ? 'right' : 'left');
+    });
+  });
 })();
 
 
