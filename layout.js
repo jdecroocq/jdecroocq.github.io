@@ -110,14 +110,22 @@ const headerHTML = `
   }
 
   document.querySelectorAll('.header-interactive').forEach(el => {
+    function side(e) {
+      return e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
+    }
+  
     el.addEventListener('mouseenter', e => {
-      const fromLeft = e.clientX < el.getBoundingClientRect().left + el.offsetWidth / 2;
-      el.style.setProperty('--origin-in', fromLeft ? 'left' : 'right');
+      const fromLeft = side(e);
+      el.classList.add('no-transition');
+      el.style.setProperty('--bar-tx', fromLeft ? '-101%' : '101%');
+      el.getBoundingClientRect(); // force reflow
+      el.classList.remove('no-transition');
+      requestAnimationFrame(() => el.style.setProperty('--bar-tx', '0%'));
     });
   
     el.addEventListener('mouseleave', e => {
-      const toRight = e.clientX > el.getBoundingClientRect().left + el.offsetWidth / 2;
-      el.style.setProperty('--origin-out', toRight ? 'right' : 'left');
+      const toRight = !side(e);
+      el.style.setProperty('--bar-tx', toRight ? '101%' : '-101%');
     });
   });
 })();
