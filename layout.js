@@ -242,54 +242,23 @@ const footerHTML = `
 
 
 
-(function () {
-  const overlay = document.createElement('div');
-  overlay.id = 'page-overlay';
-  document.body.appendChild(overlay);
 
-  overlay.classList.add('fade-in');
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      overlay.style.transition = 'opacity 0.35s ease';
-      overlay.classList.remove('fade-in');
-    });
-  });
+document.addEventListener('click', function (e) {
+  const link = e.target.closest('a');
+  if (!link) return;
 
-  document.addEventListener('click', function (e) {
-    const link = e.target.closest('a');
-    if (!link) return;
-    if (link.classList.contains('dock-btn')) return;
-    if (link.target === '_blank') return;
+  if (link.classList.contains('dock-btn')) {
+    return;
+  }
 
-    let url;
-    try { url = new URL(link.href, window.location.origin); } catch { return; }
-    if (url.origin !== window.location.origin) return;
+  const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "");
+  const currentPath = window.location.pathname.replace(/\/+$/, "");
 
-    const linkPath = url.pathname.replace(/\/+$/, "");
-    const currentPath = window.location.pathname.replace(/\/+$/, "");
-
-    if (linkPath === currentPath) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
+  if (linkPath === currentPath) {
     e.preventDefault();
-    overlay.classList.add('fade-out');
-    setTimeout(() => {
-      window.location.href = link.href;
-    }, 350);
-  });
-
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) {
-      overlay.style.transition = 'none';
-      overlay.classList.remove('fade-out');
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          overlay.style.transition = 'opacity 0.35s ease';
-        });
-      });
-    }
-  });
-})();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+});
