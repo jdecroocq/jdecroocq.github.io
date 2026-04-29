@@ -70,6 +70,7 @@ body {
   
   --color-0-75: hsl(0 0% var(--color-0-l) / 0.75);
   --color-0-50: hsl(0 0% var(--color-0-l) / 0.5);
+  --color-1-75: hsl(0 O% var(--color-1-l) / 0.75);
   --color-2-75: hsl(0 0% var(--color-2-l) / 0.75);
   
   --color-a-h: 155;
@@ -264,8 +265,6 @@ a:hover {
 
 
 .btn {
-  position: relative;
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -273,70 +272,84 @@ a:hover {
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: bold;
-  text-transform: none;
   text-decoration: none !important;
   line-height: 1;
   cursor: pointer;
-  padding: 14px 28px;
-  border-radius: 999px;
-  border: var(--size-border) solid var(--color-5);
-  background: transparent;
-  color: var(--color-5);
   box-sizing: border-box;
-  transition: color 0.4s ease;
+  border: var(--border);
+  border-radius: 999px;
+  background: var(--color-1);
+  color: var(--color-5);
 }
 
-.btn::before {
+.btn-text {
+  padding: 14px 28px;
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media (hover: hover) {
+  .btn-text:hover,
+  .btn-icon:hover {
+    background: var(--color-2);
+  }
+}
+
+.btn-glass {
+  background: var(--color-0-75);
+  backdrop-filter: var(--blur-1);
+  box-shadow: var(--shadow);
+}
+
+@media (hover: hover) {
+  .btn-glass:hover {
+    background: var(--color-1-75);
+  }
+}
+
+.btn-a {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-a);
+  border-color: var(--color-a);
+  color: var(--color-0);
+  transition: color 0.45s ease;
+}
+
+.btn-a::before {
   content: '';
   position: absolute;
-  top: 50%;
   left: 50%;
-  width: 100%;
+  top: 150%;
+  width: 250%;
   aspect-ratio: 1;
-  background: var(--color-5);
+  background: var(--color-1);
   border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+  transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 0;
 }
 
-.btn > * {
+.btn-a > * {
   position: relative;
   z-index: 1;
 }
 
 @media (hover: hover) {
-  .btn:hover {
-    color: var(--color-0);
-  }
-
-  .btn:hover::before {
-    transform: translate(-50%, -50%) scale(2.5);
-  }
-}
-
-.btn-a {
-  border-color: var(--color-a);
-  color: var(--color-a);
-}
-
-.btn-a::before {
-  background: var(--color-a);
-}
-
-@media (hover: hover) {
   .btn-a:hover {
-    color: var(--color-0);
+    color: var(--color-5);
+  }
+
+  .btn-a:hover::before {
+    top: -100%;
   }
 }
-
-.btn-icon {
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border-radius: 50%;
-}
-
 
 
 
@@ -1057,10 +1070,11 @@ footer a:hover {
   position: absolute;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(12px);
+  transform: translateX(-50%) translateY(10px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
 }
 
 @media (hover: hover) {
