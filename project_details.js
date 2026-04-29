@@ -66,8 +66,11 @@ async function loadProjectContent() {
           <div class="project-image">
             <div class="img-hq-wrapper">
               <img src="${webPath}" alt="${projectTitle} - Image ${i}" class="project-img"/>
-              <a href="${fullPath}" target="_blank" rel="noopener noreferrer" class="btn btn-icon hq-button" title="View image in high quality">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter" stroke-linecap="square">
+              <a href="${fullPath}" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-icon btn-glass hq-button" title="View in high quality">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linejoin="miter" stroke-linecap="square">
                   <path d="M3 8 V3 H8 M16 3 H21 V8 M21 16 V21 H16 M8 21 H3 V16"/>
                 </svg>
               </a>
