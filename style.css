@@ -301,18 +301,6 @@ a:hover {
   }
 }
 
-.btn-glass {
-  background: var(--color-0-75);
-  backdrop-filter: var(--blur-1);
-  box-shadow: var(--shadow);
-}
-
-@media (hover: hover) {
-  .btn-glass:hover {
-    background: var(--color-1-75);
-  }
-}
-
 .btn-a {
   position: relative;
   overflow: hidden;
@@ -1068,9 +1056,9 @@ footer a:hover {
 
 .hq-button {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  top: 16px;
+  right: 16px;
+  transform: translateY(8px);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -1081,7 +1069,7 @@ footer a:hover {
   .img-hq-wrapper:hover .hq-button {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
