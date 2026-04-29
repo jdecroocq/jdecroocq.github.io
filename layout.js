@@ -120,7 +120,6 @@ const headerHTML = `
       let leaveTimeout = null;
       let currentItem = null;
   
-      // Constantes pour le masque (clip-path)
       const CLIP_HIDDEN_L = 'inset(0 100% 0 0)';
       const CLIP_HIDDEN_R = 'inset(0 0 0 100%)';
       const CLIP_VISIBLE  = 'inset(0 0 0 0)';
@@ -142,17 +141,15 @@ const headerHTML = `
             hoverLine.style.transition = 'none';
             hoverLine.style.left = targetLeft + 'px';
             hoverLine.style.width = targetWidth + 'px';
-            // La barre est à la bonne taille, mais on la masque du côté où l'on entre
             hoverLine.style.clipPath = fromLeft ? CLIP_HIDDEN_L : CLIP_HIDDEN_R;
             
-            void hoverLine.offsetHeight; // Force le navigateur à appliquer le point de départ
+            void hoverLine.offsetHeight;
             
             hoverLine.style.transition = 'clip-path var(--line-duration-io) var(--line-curve-io)';
             hoverLine.style.clipPath = CLIP_VISIBLE;
             
             isHovering = true;
           } else {
-            // On anime le déplacement physique de la barre + le masque au cas où il ne soit pas fini
             hoverLine.style.transition = 'left var(--line-duration-move) var(--line-curve-move), width var(--line-duration-move) var(--line-curve-move), clip-path var(--line-duration-move) var(--line-curve-move)';
             hoverLine.style.left = targetLeft + 'px';
             hoverLine.style.width = targetWidth + 'px';
@@ -171,7 +168,6 @@ const headerHTML = `
   
           leaveTimeout = setTimeout(() => {
             hoverLine.style.transition = 'clip-path var(--line-duration-io) var(--line-curve-io)';
-            // La barre reste en place physiquement, mais le masque balaye vers la sortie
             hoverLine.style.clipPath = toRight ? CLIP_HIDDEN_R : CLIP_HIDDEN_L;
             
             isHovering = false;
