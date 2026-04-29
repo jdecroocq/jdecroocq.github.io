@@ -114,7 +114,6 @@ const headerHTML = `
     if (headerMain) {
       const hoverLine = document.createElement('div');
       hoverLine.className = 'header-hover-line';
-      hoverLine.style.transform = 'scaleX(0)';
       headerMain.appendChild(hoverLine);
   
       let isHovering = false;
@@ -136,15 +135,15 @@ const headerHTML = `
             const fromLeft = e.clientX < rect.left + rect.width / 2;
             
             hoverLine.style.transition = 'none';
+            // La barre commence comme un point (width: 0) du côté où l'on entre
+            hoverLine.style.left = (fromLeft ? targetLeft : targetLeft + targetWidth) + 'px';
+            hoverLine.style.width = '0px';
+            
+            void hoverLine.offsetHeight; // Force le navigateur à appliquer la position initiale
+            
+            hoverLine.style.transition = 'left var(--line-duration-io) var(--line-curve-io), width var(--line-duration-io) var(--line-curve-io)';
             hoverLine.style.left = targetLeft + 'px';
             hoverLine.style.width = targetWidth + 'px';
-            hoverLine.style.transformOrigin = fromLeft ? 'left' : 'right';
-            hoverLine.style.transform = 'scaleX(0)';
-            
-            void hoverLine.offsetHeight;
-            
-            hoverLine.style.transition = 'transform var(--line-duration-io) var(--line-curve-io)';
-            hoverLine.style.transform = 'scaleX(1)';
             
             isHovering = true;
           } else {
@@ -161,12 +160,17 @@ const headerHTML = `
           if (currentItem !== el) return;
   
           const rect = el.getBoundingClientRect();
+          const parentRect = headerMain.getBoundingClientRect();
+          const targetLeft = rect.left - parentRect.left;
+          const targetWidth = rect.width;
           const toRight = e.clientX > rect.left + rect.width / 2;
   
           leaveTimeout = setTimeout(() => {
-            hoverLine.style.transition = 'transform var(--line-duration-io) var(--line-curve-io)';
-            hoverLine.style.transformOrigin = toRight ? 'right' : 'left';
-            hoverLine.style.transform = 'scaleX(0)';
+            hoverLine.style.transition = 'left var(--line-duration-io) var(--line-curve-io), width var(--line-duration-io) var(--line-curve-io)';
+            // La barre se réduit vers un point (width: 0) du côté où l'on sort
+            hoverLine.style.left = (toRight ? targetLeft + targetWidth : targetLeft) + 'px';
+            hoverLine.style.width = '0px';
+            
             isHovering = false;
             currentItem = null;
           }, 30);
