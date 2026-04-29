@@ -1,3 +1,4 @@
+/*
 @font-face {
   font-family: 'Orkney';
   src: url('/fonts/Orkney-Light.woff2') format('woff2'),
@@ -6,6 +7,7 @@
   font-style: normal;
   font-display: block;
 }
+*/
 
 @font-face {
   font-family: 'Orkney';
@@ -25,6 +27,7 @@
   font-display: block;
 }
 
+/*
 @font-face {
   font-family: 'Orkney';
   src: url('/fonts/Orkney-Bold.woff2') format('woff2'),
@@ -33,6 +36,7 @@
   font-style: normal;
   font-display: block;
 }
+*/
 
 html, body {
   margin: 0;
@@ -136,7 +140,7 @@ body.light-mode {
 
 h1 {
   font-size: 4rem;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
   color: var(--color-5);
   text-align: left;
@@ -170,13 +174,7 @@ h4 {
   color: var(--color-5);
   text-align: left;
   line-height: 1;
-  margin: 2rem 0 0.5rem 0;
-}
-
-h4::before {
-  content: "✦";
-  margin-right: 0.5rem;
-  color: var(--color-a);
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 h5 {
@@ -253,12 +251,12 @@ a:hover {
   text-align: justify;
   width: 1024px;
   max-width: calc(100% -  12vw);
-  margin: max(64px, 5vw) auto;
+  margin: 64px auto;
 }
 
 
 .section {
-  margin: max(64px, 5vw) 0;
+  margin: 64px 0;
 }
 
 
