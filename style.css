@@ -369,6 +369,29 @@ a:hover {
 */
 
 
+#page-overlay {
+  position: fixed;
+  inset: 0;
+  top: var(--size-header);
+  background: var(--color-0);
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+#page-overlay.fade-out {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#page-overlay.fade-in {
+  opacity: 1;
+  pointer-events: auto;
+  transition: none;
+}
+
+
 
 
 header {
