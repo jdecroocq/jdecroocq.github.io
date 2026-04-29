@@ -148,7 +148,7 @@ const headerHTML = `
             
             isHovering = true;
           } else {
-            hoverLine.style.transition = 'transform var(--line-duration-io) var(--line-curve-io)';
+            hoverLine.style.transition = 'left var(--line-duration-move) var(--line-curve-move), width var(--line-duration-move) var(--line-curve-move)';
             hoverLine.style.left = targetLeft + 'px';
             hoverLine.style.width = targetWidth + 'px';
           }
