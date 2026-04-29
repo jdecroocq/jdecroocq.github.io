@@ -135,11 +135,10 @@ const headerHTML = `
             const fromLeft = e.clientX < rect.left + rect.width / 2;
             
             hoverLine.style.transition = 'none';
-            // La barre commence comme un point (width: 0) du côté où l'on entre
             hoverLine.style.left = (fromLeft ? targetLeft : targetLeft + targetWidth) + 'px';
             hoverLine.style.width = '0px';
             
-            void hoverLine.offsetHeight; // Force le navigateur à appliquer la position initiale
+            void hoverLine.offsetHeight;
             
             hoverLine.style.transition = 'left var(--line-duration-io) var(--line-curve-io), width var(--line-duration-io) var(--line-curve-io)';
             hoverLine.style.left = targetLeft + 'px';
@@ -167,7 +166,6 @@ const headerHTML = `
   
           leaveTimeout = setTimeout(() => {
             hoverLine.style.transition = 'left var(--line-duration-io) var(--line-curve-io), width var(--line-duration-io) var(--line-curve-io)';
-            // La barre se réduit vers un point (width: 0) du côté où l'on sort
             hoverLine.style.left = (toRight ? targetLeft + targetWidth : targetLeft) + 'px';
             hoverLine.style.width = '0px';
             
@@ -239,32 +237,6 @@ const footerHTML = `
         console.error('Footer build version fetch failed:', err);
       });
   }
-
-
-  document.addEventListener('click', e => {
-    const link = e.target.closest('a');
-    if (!link) return;
-    if (link.target === '_blank' || link.rel.includes('external')) return;
-  
-    const url = new URL(link.href, window.location.origin);
-    if (url.origin !== window.location.origin) return;
-  
-    const newPath = url.pathname.replace(/\/+$/, '');
-    const currentPath = window.location.pathname.replace(/\/+$/, '');
-  
-    if (newPath === currentPath) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-  
-    if (document.startViewTransition) {
-      e.preventDefault();
-      document.startViewTransition(() => {
-        window.location.href = link.href;
-      });
-    }
-  });
 })();
 
 
@@ -287,6 +259,14 @@ document.addEventListener('click', function (e) {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+    });
+    return;
+  }
+
+  if (document.startViewTransition && link.origin === window.location.origin) {
+    e.preventDefault();
+    document.startViewTransition(() => {
+      window.location.href = link.href;
     });
   }
 });
