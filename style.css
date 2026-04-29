@@ -435,7 +435,7 @@ header {
   background-color: var(--color-5);
   pointer-events: none;
   z-index: 10;
-  --line-duration-io: 0.25s;
+  --line-duration-io: 0.2s;
   --line-curve-io: ease-in-out;
   --line-duration-move: 0.3s;
   --line-curve-move: cubic-bezier(0.22, 0.61, 0.36, 1);
