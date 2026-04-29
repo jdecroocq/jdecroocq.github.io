@@ -244,7 +244,6 @@ const footerHTML = `
 document.addEventListener('click', function (e) {
   const link = e.target.closest('a');
   if (!link) return;
-
   if (link.classList.contains('dock-btn')) return;
 
   const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "");
