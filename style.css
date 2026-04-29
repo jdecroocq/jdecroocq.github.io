@@ -264,6 +264,7 @@ a:hover {
 
 
 
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -276,10 +277,10 @@ a:hover {
   line-height: 1;
   cursor: pointer;
   box-sizing: border-box;
-  border: var(--border);
+  border: var(--size-border) solid var(--color-3);
   border-radius: 999px;
   background: var(--color-1);
-  color: var(--color-5);
+  color: var(--color-4);
 }
 
 .btn-text {
@@ -298,6 +299,7 @@ a:hover {
   .btn-text:hover,
   .btn-icon:hover {
     background: var(--color-2);
+    color: var(--color-5);
   }
 }
 
