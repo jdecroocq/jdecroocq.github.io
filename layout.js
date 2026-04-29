@@ -239,6 +239,32 @@ const footerHTML = `
         console.error('Footer build version fetch failed:', err);
       });
   }
+
+
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    if (link.target === '_blank' || link.rel.includes('external')) return;
+  
+    const url = new URL(link.href, window.location.origin);
+    if (url.origin !== window.location.origin) return;
+  
+    const newPath = url.pathname.replace(/\/+$/, '');
+    const currentPath = window.location.pathname.replace(/\/+$/, '');
+  
+    if (newPath === currentPath) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+  
+    if (document.startViewTransition) {
+      e.preventDefault();
+      document.startViewTransition(() => {
+        window.location.href = link.href;
+      });
+    }
+  });
 })();
 
 
