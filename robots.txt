@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jdecroocq.github.io/sitemap.xml
