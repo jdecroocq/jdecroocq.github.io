@@ -251,7 +251,7 @@ document.addEventListener('click', function (e) {
   const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "");
   const currentPath = window.location.pathname.replace(/\/+$/, "");
 
-  if (linkPath === currentPath) {
+  if (linkPath === currentPath && url.search === window.location.search) {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
