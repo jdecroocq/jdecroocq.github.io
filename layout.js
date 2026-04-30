@@ -108,6 +108,74 @@ const headerHTML = `
       }
     });
   }
+
+  const headerMain = document.querySelector('.header-main');
+      
+    if (headerMain) {
+      const hoverLine = document.createElement('div');
+      hoverLine.className = 'header-hover-line';
+      headerMain.appendChild(hoverLine);
+  
+      let isHovering = false;
+      let leaveTimeout = null;
+      let currentItem = null;
+  
+      const CLIP_HIDDEN_L = 'inset(0 100% 0 0)';
+      const CLIP_HIDDEN_R = 'inset(0 0 0 100%)';
+      const CLIP_VISIBLE  = 'inset(0 0 0 0)';
+  
+      document.querySelectorAll('.header-interactive').forEach(el => {
+        el.addEventListener('mouseenter', e => {
+          if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  
+          clearTimeout(leaveTimeout);
+  
+          const rect = el.getBoundingClientRect();
+          const parentRect = headerMain.getBoundingClientRect();
+          const targetLeft = rect.left - parentRect.left;
+          const targetWidth = rect.width;
+  
+          if (!isHovering) {
+            const fromLeft = e.clientX < rect.left + rect.width / 2;
+            
+            hoverLine.style.transition = 'none';
+            hoverLine.style.left = targetLeft + 'px';
+            hoverLine.style.width = targetWidth + 'px';
+            hoverLine.style.clipPath = fromLeft ? CLIP_HIDDEN_L : CLIP_HIDDEN_R;
+            
+            void hoverLine.offsetHeight;
+            
+            hoverLine.style.transition = 'clip-path var(--line-duration-io) var(--line-curve-io)';
+            hoverLine.style.clipPath = CLIP_VISIBLE;
+            
+            isHovering = true;
+          } else {
+            hoverLine.style.transition = 'left var(--line-duration-move) var(--line-curve-move), width var(--line-duration-move) var(--line-curve-move), clip-path var(--line-duration-move) var(--line-curve-move)';
+            hoverLine.style.left = targetLeft + 'px';
+            hoverLine.style.width = targetWidth + 'px';
+            hoverLine.style.clipPath = CLIP_VISIBLE;
+          }
+          
+          currentItem = el;
+        });
+  
+        el.addEventListener('mouseleave', e => {
+          if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+          if (currentItem !== el) return;
+  
+          const rect = el.getBoundingClientRect();
+          const toRight = e.clientX > rect.left + rect.width / 2;
+  
+          leaveTimeout = setTimeout(() => {
+            hoverLine.style.transition = 'clip-path var(--line-duration-io) var(--line-curve-io)';
+            hoverLine.style.clipPath = toRight ? CLIP_HIDDEN_R : CLIP_HIDDEN_L;
+            
+            isHovering = false;
+            currentItem = null;
+          }, 30);
+        });
+      });
+    }
 })();
 
 
@@ -180,18 +248,11 @@ document.addEventListener('click', function (e) {
   const link = e.target.closest('a');
   if (!link) return;
 
-  if (link.classList.contains('dock-btn')) {
-    return;
-  }
-
   const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "");
   const currentPath = window.location.pathname.replace(/\/+$/, "");
 
   if (linkPath === currentPath) {
     e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });

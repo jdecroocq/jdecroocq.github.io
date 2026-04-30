@@ -10,7 +10,7 @@ function convertUrlsToLinks(text) {
 
 async function loadProjectContent() {
   const projectId = getQueryParam('id');
-  
+
   const mainContent = document.getElementById('mainContent');
   const projectContentContainer = document.getElementById('projectContent');
   const videoContainer = document.getElementById('videoSection');
@@ -25,9 +25,7 @@ async function loadProjectContent() {
 
   try {
     const response = await fetch(`/projects/${projectId}/project.json`);
-    if (!response.ok) {
-      throw new Error(`Project not found (HTTP ${response.status})`);
-    }
+    if (!response.ok) throw new Error(`Project not found (HTTP ${response.status})`);
     const projectData = await response.json();
 
     const listResponse = await fetch('/projects/projects-list.json');
@@ -38,7 +36,7 @@ async function loadProjectContent() {
 
     let contentHTML = `<h2>${projectTitle}</h2><h5>Published on ${projectData.date}</h5>`;
     const formattedDescription = convertUrlsToLinks(projectData.description);
-    
+
     projectContentContainer.style.whiteSpace = 'pre-wrap';
     projectContentContainer.innerHTML = contentHTML + formattedDescription;
 
@@ -55,22 +53,24 @@ async function loadProjectContent() {
         </div>
       `;
     }
-    
+
     imagesContainer.innerHTML = '';
     if (projectData.imageCount && projectData.imageCount > 0) {
       let imagesHTML = '';
       for (let i = 1; i <= projectData.imageCount; i++) {
         const imageNumber = String(i).padStart(2, '0');
-        const imageExtension = 'jpg';
-        const webPath = `/projects/${projectId}/web/${imageNumber}.${imageExtension}`;
-        const fullPath = `/projects/${projectId}/full/${imageNumber}.${imageExtension}`;
+        const webPath = `/projects/${projectId}/web/${imageNumber}.jpg`;
+        const fullPath = `/projects/${projectId}/full/${imageNumber}.jpg`;
 
         imagesHTML += `
           <div class="project-image">
             <div class="img-hq-wrapper">
               <img src="${webPath}" alt="${projectTitle} - Image ${i}" class="project-img"/>
-              <a href="${fullPath}" target="_blank" rel="noopener noreferrer" class="hq-button" title="View image in high quality">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="miter" stroke-linecap="square" aria-hidden="true" focusable="false" role="img">
+              <a href="${fullPath}" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-icon hq-button" title="View in high quality">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linejoin="miter" stroke-linecap="square">
                   <path d="M3 8 V3 H8 M16 3 H21 V8 M21 16 V21 H16 M8 21 H3 V16"/>
                 </svg>
               </a>
@@ -81,67 +81,33 @@ async function loadProjectContent() {
       imagesContainer.innerHTML = imagesHTML;
     }
 
+    updateProjectNavigation(projectId, projectList);
+
   } catch (error) {
-    console.error("Failed to load project content:", error);
+    console.error('Failed to load project content:', error);
     mainContent.innerHTML = `<h1>Error loading project.</h1><p>${error.message}</p>`;
   }
 }
 
-async function updateDockNavigation() {
-  const currentProjectId = getQueryParam('id');
-  if (!currentProjectId) return;
+function updateProjectNavigation(currentProjectId, projectList) {
+  const nav = document.getElementById('projectNav');
+  const prevLink = document.getElementById('navPrevProject');
+  const nextLink = document.getElementById('navNextProject');
 
-  try {
-    const response = await fetch('/projects/projects-list.json');
-    const projects = await response.json();
-    
-    const currentIndex = projects.findIndex(project => project.id === currentProjectId);
-    if (currentIndex === -1) {
-        console.error("Could not find current project in the project list. Navigation will not work.");
-        return;
-    }
+  if (!nav || !prevLink || !nextLink) return;
 
-    const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
-    const nextIndex = (currentIndex + 1) % projects.length;
+  const currentIndex = projectList.findIndex(p => p.id === currentProjectId);
+  if (currentIndex === -1) return;
 
-    const prevProject = projects[prevIndex];
-    const nextProject = projects[nextIndex];
+  const prevIndex = (currentIndex - 1 + projectList.length) % projectList.length;
+  const nextIndex = (currentIndex + 1) % projectList.length;
 
-    document.getElementById('dockPrevProject').href = `/project_details.html?id=${prevProject.id}`;
-    document.getElementById('dockNextProject').href = `/project_details.html?id=${nextProject.id}`;
+  prevLink.href = `/project_details.html?id=${projectList[prevIndex].id}`;
+  nextLink.href = `/project_details.html?id=${projectList[nextIndex].id}`;
 
-  } catch (error) {
-    console.error("Failed to update dock navigation:", error);
-  }
-}
-
-function updateFloatingDockPosition() {
-  const dock = document.querySelector('.floating-dock');
-  const footer = document.getElementById('footer-placeholder');
-  if (!dock || !footer) return;
-
-  const minSpace = 0;
-  const footerRect = footer.getBoundingClientRect();
-  const overlap = window.innerHeight - footerRect.top + minSpace;
-
-  if (overlap > 0) {
-    dock.style.transform = `translateX(-50%) translateY(-${overlap}px)`;
-  } else {
-    dock.style.transform = 'translateX(-50%) translateY(0)';
-  }
+  nav.style.display = 'flex';
 }
 
 window.addEventListener('DOMContentLoaded', () => {
   loadProjectContent();
-  updateDockNavigation();
-  updateFloatingDockPosition();
 });
-
-window.addEventListener('scroll', updateFloatingDockPosition);
-window.addEventListener('resize', updateFloatingDockPosition);
-
-const mainContentObserver = document.getElementById('mainContent');
-if (mainContentObserver) {
-  const resizeObserver = new ResizeObserver(updateFloatingDockPosition);
-  resizeObserver.observe(mainContentObserver);
-}
