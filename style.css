@@ -469,6 +469,15 @@ header {
   --line-curve-move: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+.header-active-line {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: var(--color-5);
+  pointer-events: none;
+  z-index: 9;
+}
+
 
 .burger {
   display: none;

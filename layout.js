@@ -124,6 +124,29 @@ const headerHTML = `
       const CLIP_HIDDEN_R = 'inset(0 0 0 100%)';
       const CLIP_VISIBLE  = 'inset(0 0 0 0)';
   
+      // Active page indicator
+      const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+      const activeLink = [...headerMain.querySelectorAll('.nav-link')].find(link => {
+        const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, '') || '/';
+        return linkPath === currentPath;
+      });
+
+      if (activeLink) {
+        const activeLine = document.createElement('div');
+        activeLine.className = 'header-active-line';
+        headerMain.appendChild(activeLine);
+
+        function positionActiveLine() {
+          const rect = activeLink.getBoundingClientRect();
+          const parentRect = headerMain.getBoundingClientRect();
+          activeLine.style.left = (rect.left - parentRect.left) + 'px';
+          activeLine.style.width = rect.width + 'px';
+        }
+
+        positionActiveLine();
+        window.addEventListener('resize', positionActiveLine);
+      }
+
       document.querySelectorAll('.header-interactive').forEach(el => {
         el.addEventListener('mouseenter', e => {
           if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
