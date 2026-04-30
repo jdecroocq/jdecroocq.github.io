@@ -102,7 +102,6 @@ body {
   --color-border: var(--color-3);
 
   --animation-header: 0.4s ease-in-out;
-  --duration-theme-transition: 0.4s;
   --curve-smooth: cubic-bezier(0.2, 0.6, 0.5, 1);
   --curve-fluid: cubic-bezier(0.4, 1.1, 0.7, 1.2);
 
@@ -221,7 +220,7 @@ a:hover {
 
 
 .theme-transition * {
-  transition: var(--duration-theme-transition);
+  transition: 0.4s;
 }
 
 
@@ -272,7 +271,7 @@ a:hover {
   gap: 8px;
   font-family: inherit;
   font-size: 0.9rem;
-  font-weight: bold;
+  font-weight: 500;
   text-decoration: none !important;
   line-height: 1;
   cursor: pointer;
@@ -284,7 +283,7 @@ a:hover {
 }
 
 .btn-text {
-  padding: 14px 28px;
+  padding: 16px 24px;
 }
 
 .btn-icon {
@@ -306,34 +305,15 @@ a:hover {
 .btn-a {
   position: relative;
   overflow: hidden;
-  background: var(--color-a);
+  background: var(--color-0);
   border-color: var(--color-a);
-  color: var(--color-0);
-  transition: color 0.45s ease;
-}
-
-.btn-a::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 150%;
-  width: 250%;
-  aspect-ratio: 1;
-  background: var(--color-1);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  transition: top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 0;
-}
-
-.btn-a > * {
-  position: relative;
-  z-index: 1;
+  color: var(--color-a);
 }
 
 @media (hover: hover) {
   .btn-a:hover {
-    color: var(--color-5);
+    color: var(--color-0);
+    background: var(--color-a)
   }
 
   .btn-a:hover::before {
