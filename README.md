@@ -1,4 +1,3 @@
-This repository contains the source code and projects for my personal artist portfolio, accessible at [jdecroocq.github.io](https://jdecroocq.github.io).
+This repository contains the source code and media for my personal artist portfolio. The live site is available at [jdecroocq.github.io](https://jdecroocq.github.io/).
 
-This project is licensed under the MIT License — see [LICENSE](./LICENSE) for the full text.\
-Some parts of the project, or third-party dependencies, may be subject to additional terms specified in [NOTICE](./NOTICE).
+This project is licensed under the MIT License. Refer to the [LICENSE](./LICENSE) and [NOTICE](./NOTICE) files for full details on terms and third-party dependencies.
