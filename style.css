@@ -322,6 +322,23 @@ a:hover {
 
 
 
+
+
+.icon-mask {
+  display: inline-block;
+  background: var(--color-a-g); /* C'est ton dégradé ! */
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+
+
+
+
 #dark-overlay {
   position: fixed;
   bottom: 0;
@@ -850,9 +867,8 @@ footer a:hover {
 }
 
 .icon-img {
-  height: 100%;
-  max-height: 24px;
-  object-fit: contain;
+  width: 24px;
+  height: 24px;
   transition: transform 0.2s cubic-bezier(0.2, 0.6, 0.5, 1);
 }
 
@@ -904,9 +920,9 @@ footer a:hover {
 }  
 
 .software-icon {
-  width: 45px;
-  height: auto;
-  object-fit: contain;
+  width: 36px;
+  height: 36px;
+  margin: 4px 0;
   transition: 0.4s var(--curve-smooth);
 }
 
@@ -928,6 +944,7 @@ footer a:hover {
   transition: color 0.2s;
   width: 100%;
   max-width: 180px;
+  line-height: 1.1;
 }
 
 .connect-item a {
@@ -942,12 +959,10 @@ footer a:hover {
 
 .connect-icon {
   width: 35px;
-  height: auto;
-  object-fit: contain;
+  height: 35px;
   transition: transform 0.2s;
   margin-bottom: 20px;
 }
-
 
 @media (hover: hover) {
   .connect-item:hover span {
