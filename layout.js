@@ -124,7 +124,6 @@ const headerHTML = `
       const CLIP_HIDDEN_R = 'inset(0 0 0 100%)';
       const CLIP_VISIBLE  = 'inset(0 0 0 0)';
   
-      // Active page indicator
       const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
       const activeLink = [...headerMain.querySelectorAll('.nav-link')].find(link => {
         const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, '') || '/';
@@ -143,7 +142,7 @@ const headerHTML = `
           activeLine.style.width = rect.width + 'px';
         }
 
-        positionActiveLine();
+        document.fonts.ready.then(positionActiveLine);
         window.addEventListener('resize', positionActiveLine);
       }
 
