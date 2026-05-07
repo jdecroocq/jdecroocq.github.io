@@ -773,11 +773,12 @@ footer a:hover {
 
 .image-label {
   position: absolute;
-  bottom: 3%;
+  bottom: 4.5%;
   left: 5%;
   right: 5%;
   color: white;
   font-weight: 500;
+  line-height: 1;
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
