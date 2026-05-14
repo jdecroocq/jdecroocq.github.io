@@ -124,9 +124,11 @@ const headerHTML = `
       const CLIP_HIDDEN_R = 'inset(0 0 0 100%)';
       const CLIP_VISIBLE  = 'inset(0 0 0 0)';
   
-      const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+      const normalizePath = (path) => path.replace(/(?:\/index\.html|\.html)$/i, '').replace(/\/+$/, '') || '/';
+      
+      const currentPath = normalizePath(window.location.pathname);
       const activeLink = [...headerMain.querySelectorAll('.nav-link')].find(link => {
-        const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, '') || '/';
+        const linkPath = normalizePath(new URL(link.href, window.location.origin).pathname);
         return linkPath === currentPath;
       });
 
@@ -272,8 +274,10 @@ document.addEventListener('click', function (e) {
 
   const url = new URL(link.href, window.location.origin);
   
-  const linkPath = url.pathname.replace(/\/+$/, "");
-  const currentPath = window.location.pathname.replace(/\/+$/, "");
+  const normalizePath = (path) => path.replace(/(?:\/index\.html|\.html)$/i, '').replace(/\/+$/, '') || '/';
+  
+  const linkPath = normalizePath(url.pathname);
+  const currentPath = normalizePath(window.location.pathname);
 
   if (linkPath === currentPath && url.search === window.location.search) {
     e.preventDefault();
